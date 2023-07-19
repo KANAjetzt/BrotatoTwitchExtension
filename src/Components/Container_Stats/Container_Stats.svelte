@@ -1,6 +1,5 @@
 <script>
-	import BtnFold from "../Btn_Fold/Btn_Fold.svelte";
-import BtnStatSwitch from "../Btn_Stat_Switch/Btn_Stat_Switch.svelte";
+	import BtnStatSwitch from "../Btn_Stat_Switch/Btn_Stat_Switch.svelte";
 	import Container from "../Container/Container.svelte";
 	import InfoStat from "../Info_Stat/Info_Stat.svelte";
 </script>
@@ -22,9 +21,6 @@ import BtnStatSwitch from "../Btn_Stat_Switch/Btn_Stat_Switch.svelte";
 
 	</div>
 	</Container>
-	<div class="btn_fold">
-		<BtnFold />
-	</div>
 </div>
 
 <style>
@@ -57,10 +53,5 @@ import BtnStatSwitch from "../Btn_Stat_Switch/Btn_Stat_Switch.svelte";
 		width: 100%;
 	}
 
-	.btn_fold {
-		position: absolute;
-    right: 0rem;
-    bottom: -2rem;
-		z-index: 2;
-	}
+
 </style>

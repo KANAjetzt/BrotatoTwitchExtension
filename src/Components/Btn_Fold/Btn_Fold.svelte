@@ -1,8 +1,13 @@
 <script>
+	import {createEventDispatcher} from 'svelte'
 	import Icon_Arrow from "../icons/Arrow.svelte";
 
+	const dispatch = createEventDispatcher()
+
 </script>
-<button>
+<button class="btn_fold" on:click={() => {
+	dispatch('click')
+}}>
 	<div class="icon">
 		<Icon_Arrow width={16} height={10} fill={"#eee"} rotate={270}/>
 	</div>
