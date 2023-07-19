@@ -17,8 +17,12 @@
 				return {x: 400, duration: 200, easing: quintOut}
 				break;
 			case "down":
-			return {y: 200, duration: 200, easing: quintOut}
-			break;
+				return {y: 200, duration: 200, easing: quintOut}
+				break;
+			case "left_top":
+				return {x: -200, duration: 200, easing: quintOut}
+				break;
+
 			default:
 				break;
 		}
@@ -87,5 +91,10 @@
 	.down {
 		right: -2rem;
     bottom: 0;
+	}
+
+	.left_top {
+		left: 0px;
+		top: -2rem;
 	}
 </style>

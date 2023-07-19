@@ -1,4 +1,5 @@
 <script>
+	import Container_Weapons from './../Components/Container_Weapons/Container_Weapons.svelte';
 	import Container_Stats from './../Components/Container_Stats/Container_Stats.svelte';
 	import Container_Items from './../Components/Container_Items/Container_Items.svelte';
 
@@ -21,6 +22,9 @@
 	<div class="container_items">
 		<Container_Items />
 	</div>
+	<div class="container_weapons">
+		<Container_Weapons />
+	</div>
 </div>
 
 
@@ -41,6 +45,14 @@
 
 	.container_items {
 		grid-column: 1 / 3;
-		grid-row: -1;
+		grid-row: 4 / 5;
+		z-index: 5;
+	}
+
+	.container_weapons {
+		grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    align-self: end;
+		z-index: 2;
 	}
 </style>

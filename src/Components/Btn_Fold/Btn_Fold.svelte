@@ -15,6 +15,9 @@
 			case "down":
 				return is_folded ? 180 : 0
 				break;
+			case "left_top":
+				return is_folded ? 270 : 90
+				break;
 			default:
 				break;
 		}
@@ -49,6 +52,10 @@
 		padding: 2rem 0.5rem 0.3rem 2rem;
 	}
 
+	.btn_left_top {
+		padding: 0.5rem 2rem 1rem 0.5rem;
+	}
+
 	.btn_folded_right {
 		margin-right: -0.5rem;
 		padding: 1rem 2rem 1rem 2rem;
@@ -59,6 +66,11 @@
 		padding: 0.5rem 2rem 1.5rem 2rem;
 	}
 
+	.btn_folded_left_top {
+		margin-left: -0.5rem;
+    padding: 1.5rem 0.5rem 1.5rem 2rem;
+	}
+
 	.icon_right {
 		margin-right: -2.5rem;
 	}
@@ -66,4 +78,6 @@
 	.icon_folded_right {
 		margin-left: -1rem;
 	}
+
+
 </style>
