@@ -20,6 +20,10 @@
 	gap: 1rem;
 }
 
+p:last-child {
+	text-align: end;
+}
+
 img {
 	width: 1.5rem;
 	height: 1.5rem;

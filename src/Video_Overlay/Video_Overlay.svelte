@@ -1,9 +1,7 @@
 <script>
-	import BtnStatSwitch from "../Components/Btn_Stat_Switch/Btn_Stat_Switch.svelte";
-	import Container from "../Components/Container/Container.svelte";
-	import InfoStat from "../Components/Info_Stat/Info_Stat.svelte";
+	import Container_Stats from './../Components/Container_Stats/Container_Stats.svelte';
 
-// import { onMount } from "svelte";
+	// import { onMount } from "svelte";
 
 // let id = undefined;
 
@@ -15,14 +13,19 @@
 // });
 </script>
 
-<Container>
-	<h2>Stats</h2>
+<div class="overlay">
 
-	<section class="buttons">
-		<BtnStatSwitch btn_text="Primary" />
-		<BtnStatSwitch btn_text="Secondary" />
-	</section>
+	<Container_Stats />
 
-	<InfoStat img_src="static/stat_icons/percent_damage.png" stat_text="damage" stat_value="10%"/>
+</div>
 
-</Container>
+
+<style>
+	.overlay {
+		display: grid;
+		grid-template-columns: max-content 1fr max-content;
+		width: 100vw;
+		height: 100vh;
+		align-items: center;
+	}
+</style>
