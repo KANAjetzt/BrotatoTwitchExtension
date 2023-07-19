@@ -1,17 +1,47 @@
 <script>
+	import { statefulSwap } from "../../stores"
+  import { fly } from 'svelte/transition';
+  import { quintOut } from 'svelte/easing';
 	import BtnFold from "../Btn_Fold/Btn_Fold.svelte";
 
-	function handle_btn_fold_click() {
+	// https://stackoverflow.com/a/65171909
+	const {onOutro, transitionTo, state} = statefulSwap("is_not_folded")
 
-	}
+	let is_folded = false
 </script>
 
-<div class="container">
-<slot />
-</div>
-<div class="btn_fold">
-	<BtnFold on:click={handle_btn_fold_click}/>
-</div>
+{#if $state === "is_not_folded"}
+	<div
+		class="container"
+		in:fly|local={{x: 400, duration: 200, easing: quintOut}}
+		out:fly|local={{x: 400, duration: 200}}
+	>
+	<slot />
+	</div>
+	<div
+		class="btn_fold"
+		in:fly|local={{x: 100, duration: 200, easing: quintOut}}
+		out:fly|local={{x: 100, duration: 200, easing: quintOut}}
+		on:outroend={onOutro}
+	>
+		<BtnFold {is_folded} on:click={e =>  {
+				is_folded = !is_folded
+				transitionTo("is_folded")
+			}} />
+	</div>
+{:else if $state === "is_folded"}
+	<div
+		class="btn_fold"
+		in:fly|local={{x: 100, duration: 200, easing: quintOut}}
+		out:fly|local={{x: 100, duration: 200, easing: quintOut}}
+		on:outroend={onOutro}
+	>
+		<BtnFold {is_folded} on:click={e =>  {
+				transitionTo("is_not_folded")
+				is_folded = !is_folded
+			}} />
+	</div>
+{/if}
 
 
 <style>
