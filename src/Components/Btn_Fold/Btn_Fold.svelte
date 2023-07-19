@@ -2,16 +2,30 @@
 	import {createEventDispatcher} from 'svelte'
 	import Icon_Arrow from "../icons/Arrow.svelte";
 
-	export var is_folded = false
+	export let fold_direction
+	export let is_folded = false
 
 	const dispatch = createEventDispatcher()
 
+	function get_arrow_deg() {
+		switch (fold_direction) {
+			case "right":
+				return is_folded ? 90 : 270
+				break;
+			case "down":
+				return is_folded ? 180 : 0
+				break;
+			default:
+				break;
+		}
+	}
+
 </script>
-<button class={is_folded ? "btn_folded" : ""} on:click={() => {
+<button class={`btn_${fold_direction} ${is_folded ? `btn_folded_${fold_direction}` : ""}`} on:click={() => {
 	dispatch('click')
 }}>
-	<div class={is_folded ? "folded" : "icon"}>
-		<Icon_Arrow width={16} height={10} fill={"#eee"} rotate={is_folded ? 90 : 270}/>
+	<div class={is_folded ? `icon_folded_${fold_direction}` : `icon_${fold_direction}`}>
+		<Icon_Arrow width={16} height={10} fill={"#eee"} rotate={get_arrow_deg()}/>
 	</div>
 </button>
 
@@ -19,7 +33,7 @@
 	button {
 		border: none;
 		border-radius: var(--border-radius-primary);
-		padding: 1rem 2rem 0.5rem 2rem;
+
 		background-color: #303030;
 	}
 
@@ -27,16 +41,29 @@
 		cursor: pointer;
 	}
 
-	.btn_folded {
+	.btn_right {
+		padding: 1rem 2rem 0.5rem 2rem;
+	}
+
+	.btn_down {
+		padding: 2rem 0.5rem 0.3rem 2rem;
+	}
+
+	.btn_folded_right {
 		margin-right: -0.5rem;
 		padding: 1rem 2rem 1rem 2rem;
 	}
 
-	.icon {
+	.btn_folded_down {
+		margin-bottom: -0.5rem;
+		padding: 0.5rem 2rem 1.5rem 2rem;
+	}
+
+	.icon_right {
 		margin-right: -2.5rem;
 	}
 
-	.folded {
+	.icon_folded_right {
 		margin-left: -1rem;
 	}
 </style>

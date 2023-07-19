@@ -1,7 +1,7 @@
 import {writable} from "svelte/store"
 
 // https://stackoverflow.com/a/65171909
-export default function statefulSwap(initialState) {
+export function statefulSwap(initialState) {
 	const state = writable(initialState);
 	let nextState = initialState;
 

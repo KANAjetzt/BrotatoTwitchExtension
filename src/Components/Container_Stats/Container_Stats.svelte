@@ -6,7 +6,7 @@
 
 
 <div class="stats_container">
-	<Container>
+	<Container fold_direction="right">
 		<div class="stats">
 		<h2>Stats</h2>
 
@@ -39,7 +39,7 @@
 
 	h2 {
 		text-align: center;
-		padding-bottom: 2rem;
+		padding-bottom: 1.5rem;
 	}
 
 	.buttons {
