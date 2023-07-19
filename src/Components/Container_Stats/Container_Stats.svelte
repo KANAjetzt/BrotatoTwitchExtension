@@ -1,5 +1,6 @@
 <script>
-	import BtnStatSwitch from "../Btn_Stat_Switch/Btn_Stat_Switch.svelte";
+	import BtnFold from "../Btn_Fold/Btn_Fold.svelte";
+import BtnStatSwitch from "../Btn_Stat_Switch/Btn_Stat_Switch.svelte";
 	import Container from "../Container/Container.svelte";
 	import InfoStat from "../Info_Stat/Info_Stat.svelte";
 </script>
@@ -21,11 +22,16 @@
 
 	</div>
 	</Container>
+	<div class="btn_fold">
+		<BtnFold />
+	</div>
 </div>
 
 <style>
 	.stats_container {
 		grid-column: 3 / 4;
+		position: relative;
+		z-index: 2;
 	}
 
 	.stats {
@@ -49,5 +55,12 @@
 
 	.info_stats {
 		width: 100%;
+	}
+
+	.btn_fold {
+		position: absolute;
+    right: 0rem;
+    bottom: -2rem;
+		z-index: 2;
 	}
 </style>

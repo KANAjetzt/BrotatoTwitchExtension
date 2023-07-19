@@ -27,5 +27,6 @@
 		width: 100vw;
 		height: 100vh;
 		align-items: center;
+		overflow: hidden;
 	}
 </style>

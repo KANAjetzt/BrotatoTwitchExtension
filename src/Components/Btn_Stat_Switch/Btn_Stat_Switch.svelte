@@ -10,7 +10,7 @@
 
 	button {
 		border: none;
-		border-radius: 10px;
+		border-radius: var(--border-radius-primary);
 		padding: 1.0rem 1.8rem;
 		box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 		font-family: var(--font-primary);
