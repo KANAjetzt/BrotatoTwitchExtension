@@ -14,57 +14,26 @@
 	// 		});
 	// });
 
-	async function get_game_data() {
-		// Get Data
-		const result = await fetch('/static/test_data.json');
-		const data = await result.json();
-
-		// Load into game_data store
-		$game_data.items = data.items;
-		delete data.items;
-		$game_data.weapons = data.weapons;
-		delete data.weapons;
-
-		// Get primary stats
-		for (const [key, value] of Object.entries(data)) {
-			if (key.startsWith('stat')) {
-				$game_data.stats_primary[key] = value;
-			} else {
-				$game_data.stats_secondary[key] = value;
-			}
-		}
-
-		console.log($game_data);
-	}
-
-	async function get_game_translations() {
-		// Get Data
-		const result = await fetch('/static/translations.json');
-		const data = await result.json();
-
-		// Add it to the translations store
-		$game_translations = data;
-
-		console.log($game_translations);
-	}
-
-	onMount(async () => {
-		get_game_data();
-		get_game_translations();
-	});
+	let promise = Promise.all([$game_data, $game_translations]);
 </script>
 
-<div class="overlay">
-	<div class="container_stats">
-		<Container_Stats />
-	</div>
-	<div class="container_items">
-		<Container_Items />
-	</div>
-	<div class="container_weapons">
-		<Container_Weapons />
-	</div>
-</div>
+{#await promise}
+	<p>...waiting...</p>
+{:then data}
+	{#if data}
+		<div class="overlay">
+			<div class="container_stats">
+				<Container_Stats />
+			</div>
+			<div class="container_items">
+				<Container_Items />
+			</div>
+			<div class="container_weapons">
+				<Container_Weapons />
+			</div>
+		</div>
+	{/if}
+{/await}
 
 <style>
 	.overlay {
