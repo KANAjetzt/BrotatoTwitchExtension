@@ -90,27 +90,27 @@
 	}
 
 	.right_animate_in {
-		animation: slide_in_right 0.2s ease-in-out forwards;
+		animation: slide_in_right var(--animation-slide-in-values);
 	}
 
 	.right_animate_out {
-		animation: slide_out_right 0.2s ease-in-out forwards;
+		animation: slide_out_right var(--animation-slide-in-values);
 	}
 
 	.down_animate_in {
-		animation: slide_in_down 0.2s ease-in-out forwards;
+		animation: slide_in_down var(--animation-slide-in-values);
 	}
 
 	.down_animate_out {
-		animation: slide_out_down 0.2s ease-in-out forwards;
+		animation: slide_out_down var(--animation-slide-in-values);
 	}
 
 	.left_top_animate_in {
-		animation: slide_in_left 0.2s ease-in-out forwards;
+		animation: slide_in_left var(--animation-slide-in-values);
 	}
 
 	.left_top_animate_out {
-		animation: slide_out_left 0.2s ease-in-out forwards;
+		animation: slide_out_left var(--animation-slide-in-values);
 	}
 
 	.left {
