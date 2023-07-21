@@ -16,18 +16,28 @@
 	}
 </script>
 
-<div class="info_stat">
-	<img src={img_src} alt={img_alt} />
-	<p class={get_text_color(stat_value)}>{stat_text}</p>
-	<p class={get_text_color(stat_value)}>{stat_value}</p>
-</div>
+{#if stat_text}
+	<div class="info_stat {img_src ? "columns_three" : "columns_two"}">
+		{#if img_src}
+			<img src={img_src} alt={img_alt} />
+		{/if}
+		<p class={get_text_color(stat_value)}>{stat_text}</p>
+		<p class={get_text_color(stat_value)}>{stat_value}</p>
+	</div>
+{/if}
 
 <style>
 	.info_stat {
 		display: grid;
-		grid-template-columns: min-content 1fr 1fr;
 		align-items: center;
 		gap: 1rem;
+	}
+
+	.columns_three {
+		grid-template-columns: min-content 1fr 1fr;
+	}
+	.columns_two {
+		grid-template-columns: 1fr 1fr;
 	}
 
 	.green {

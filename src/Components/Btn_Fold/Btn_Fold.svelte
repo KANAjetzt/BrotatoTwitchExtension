@@ -1,34 +1,37 @@
 <script>
-	import {createEventDispatcher} from 'svelte'
-	import Icon_Arrow from "../icons/Arrow.svelte";
+	import { createEventDispatcher } from 'svelte';
+	import Icon_Arrow from '../icons/Arrow.svelte';
 
-	export let fold_direction
-	export let is_folded = false
+	export let fold_direction;
+	export let is_folded = false;
 
-	const dispatch = createEventDispatcher()
+	const dispatch = createEventDispatcher();
 
 	function get_arrow_deg() {
 		switch (fold_direction) {
-			case "right":
-				return is_folded ? 90 : 270
+			case 'right':
+				return is_folded ? 90 : 270;
 				break;
-			case "down":
-				return is_folded ? 180 : 0
+			case 'down':
+				return is_folded ? 180 : 0;
 				break;
-			case "left_top":
-				return is_folded ? 270 : 90
+			case 'left_top':
+				return is_folded ? 270 : 90;
 				break;
 			default:
 				break;
 		}
 	}
-
 </script>
-<button class={`btn_${fold_direction} ${is_folded ? `btn_folded_${fold_direction}` : ""}`} on:click={() => {
-	dispatch('click')
-}}>
+
+<button
+	class={`btn_${fold_direction} ${is_folded ? `btn_folded_${fold_direction}` : ''}`}
+	on:click={() => {
+		dispatch('click');
+	}}
+>
 	<div class={is_folded ? `icon_folded_${fold_direction}` : `icon_${fold_direction}`}>
-		<Icon_Arrow width={16} height={10} fill={"#eee"} rotate={get_arrow_deg()}/>
+		<Icon_Arrow width={16} height={10} fill={'#eee'} rotate={get_arrow_deg()} />
 	</div>
 </button>
 
@@ -68,7 +71,7 @@
 
 	.btn_folded_left_top {
 		margin-left: -0.5rem;
-    padding: 1.5rem 0.5rem 1.5rem 2rem;
+		padding: 1.5rem 0.5rem 1.5rem 2rem;
 	}
 
 	.icon_right {
@@ -78,6 +81,4 @@
 	.icon_folded_right {
 		margin-left: -1rem;
 	}
-
-
 </style>
