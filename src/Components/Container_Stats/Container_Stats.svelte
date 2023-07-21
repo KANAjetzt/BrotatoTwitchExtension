@@ -35,12 +35,14 @@
 			<section class="buttons">
 				<BtnStatSwitch
 					btn_text="Primary"
+					is_active={current_stat_view === 'primary' ? true : false}
 					on:click={() => {
 						current_stat_view = 'primary';
 					}}
 				/>
 				<BtnStatSwitch
 					btn_text="Secondary"
+					is_active={current_stat_view === 'secondary' ? true : false}
 					on:click={() => {
 						current_stat_view = 'secondary';
 					}}
