@@ -1,52 +1,49 @@
 <script>
-	export let img_src = ""
-	export let img_alt = ""
-	export let stat_text = ""
-	export let stat_value = ""
+	export let img_src = '';
+	export let img_alt = '';
+	export let stat_text = '';
+	export let stat_value = '';
 
 	function get_text_color(value) {
-		if(value > 0){
-			return 'green'
+		if (value > 0) {
+			return 'green';
 		}
-		if(value < 0){
-			return 'red'
+		if (value < 0) {
+			return 'red';
 		}
 
-		return ''
+		return '';
 	}
-
 </script>
 
-<div class="info_stat {get_text_color(stat_value)}">
-	<img src={img_src} alt={img_alt}>
-	<p>{stat_text}</p>
-	<p>{stat_value}</p>
+<div class="info_stat">
+	<img src={img_src} alt={img_alt} />
+	<p class={get_text_color(stat_value)}>{stat_text}</p>
+	<p class={get_text_color(stat_value)}>{stat_value}</p>
 </div>
 
-
 <style>
-.info_stat {
-	display: grid;
-	grid-template-columns: min-content 1fr 1fr;
-	align-items: center;
-	gap: 1rem;
-}
+	.info_stat {
+		display: grid;
+		grid-template-columns: min-content 1fr 1fr;
+		align-items: center;
+		gap: 1rem;
+	}
 
-.green {
-	color: green;
-}
+	.green {
+		color: lightgreen;
+	}
 
-.red {
-	color: red;
-}
+	.red {
+		color: lightcoral;
+	}
 
-p:last-child {
-	text-align: end;
-}
+	p:last-child {
+		text-align: end;
+	}
 
-img {
-	width: 1.5rem;
-	height: 1.5rem;
-}
-
+	img {
+		width: 1.5rem;
+		height: 1.5rem;
+	}
 </style>

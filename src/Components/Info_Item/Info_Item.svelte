@@ -23,15 +23,15 @@
 	}
 
 	.bg_0 {
-		background-color: #e6e6e6;
+		background-color: var(--item-bg-0);
 	}
 	.bg_1 {
-		background-color: #5abeff;
+		background-color: var(--item-bg-1);
 	}
 	.bg_2 {
-		background-color: #ad5aff;
+		background-color: var(--item-bg-2);
 	}
 	.bg_3 {
-		background-color: #ff3b3b;
+		background-color: var(--item-bg-3);
 	}
 </style>

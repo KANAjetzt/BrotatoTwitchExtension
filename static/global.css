@@ -29,10 +29,18 @@ html {
 
 :root {
 	--font-primary: Anybody;
+	--font-color-primary: #eee;
 	--border-radius-primary: 10px;
 	--animation-slide-in-values: 0.2s ease-in-out forwards;
 	--item-img-size: 80px;
 	--item-padding: 5px;
+	--container-bg-color: hsla(0, 0%, 19%, 0.75);
+	--btn-bg-color: hsla(0, 0%, 85%, 0.25);
+	--item-bg-alpha: 0.4;
+	--item-bg-0: hsla(0, 0%, 90%, var(--item-bg-alpha));
+	--item-bg-1: hsla(204, 100%, 68%, var(--item-bg-alpha));
+	--item-bg-2: hsla(270, 100%, 68%, var(--item-bg-alpha));
+	--item-bg-3: hsla(0, 100%, 62%, var(--item-bg-alpha));
 }
 
 /* Sections
@@ -67,10 +75,12 @@ h4,
 h5,
 h6,
 p,
-a {
+a,
+button {
 	font-family: var(--font-primary);
 	margin: 0;
 	padding: 0;
+	color: var(--font-color-primary);
 }
 
 h1 {

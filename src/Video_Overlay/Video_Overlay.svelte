@@ -41,14 +41,19 @@
 				<Container_Stats />
 			</div>
 			<div class="container_items">
-				<Container_Items data_items={data_game.items} {data_translations} fold_direction={'down'} heading={"Items"} />
+				<Container_Items
+					data_items={data_game.items}
+					{data_translations}
+					fold_direction={'down'}
+					heading={'Items'}
+				/>
 			</div>
 			<div class="container_weapons">
 				<Container_Items
 					data_items={data_game.weapons}
 					{data_translations}
 					fold_direction={'left_top'}
-					heading={"Weapons"}
+					heading={'Weapons'}
 				/>
 			</div>
 		</div>
@@ -63,6 +68,8 @@
 		width: 100vw;
 		height: 100vh;
 		align-items: center;
+		background-image: url('/static/test_bg.png');
+		background-size: cover;
 	}
 
 	.container_stats {
