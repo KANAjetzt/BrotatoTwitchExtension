@@ -41,6 +41,9 @@ html {
 	--item-bg-1: hsla(204, 100%, 68%, var(--item-bg-alpha));
 	--item-bg-2: hsla(270, 100%, 68%, var(--item-bg-alpha));
 	--item-bg-3: hsla(0, 100%, 62%, var(--item-bg-alpha));
+	--scrollbar-color-primary: hsla(0, 0%, 36%, 0.466);
+	--scrollbar-color-secondary: hsla(0, 0%, 85%, 0.25);
+	--scrollbar-color-secondary-a-50: hsla(0, 0%, 85%, 0.5);
 }
 
 /* Sections
@@ -394,6 +397,34 @@ template {
 
 [hidden] {
 	display: none;
+}
+
+/* --- Scrollbar --- */
+
+.styled_scrollbar {
+	/* Foreground, Background */
+	scrollbar-color: var(--scrollbar-color-secondary) var(--scrollbar-color-primary);
+}
+.styled_scrollbar::-webkit-scrollbar {
+	width: 10px; /* Mostly for vertical scrollbars */
+	height: 10px; /* Mostly for horizontal scrollbars */
+}
+.styled_scrollbar::-webkit-scrollbar-thumb {
+	/* Foreground */
+	border-radius: 10px;
+	background-color: var(--scrollbar-color-secondary);
+	background-image: -webkit-linear-gradient(
+		90deg,
+		transparent,
+		--scrollbar-color-secondary-a-50,
+		transparent,
+		transparent
+	);
+}
+.styled_scrollbar::-webkit-scrollbar-track {
+	/* Background */
+	background: var(--scrollbar-color-primary);
+	border-radius: 10px;
 }
 
 /* Animations

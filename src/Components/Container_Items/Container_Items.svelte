@@ -13,7 +13,7 @@
 <div class="items_container">
 	<Container {fold_direction}>
 		<h2>{heading}</h2>
-		<div class="items">
+		<div class="items styled_scrollbar">
 			{#if data_items}
 				{#each data_items as item}
 					<Info_Item
