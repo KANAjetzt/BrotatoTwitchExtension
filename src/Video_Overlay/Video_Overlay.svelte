@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
 	import { game_data, game_translations } from './../stores.js';
-	import Container_Weapons from './../Components/Container_Weapons/Container_Weapons.svelte';
 	import Container_Stats from './../Components/Container_Stats/Container_Stats.svelte';
 	import Container_Items from './../Components/Container_Items/Container_Items.svelte';
 
@@ -15,6 +14,22 @@
 	// });
 
 	let promise = Promise.all([$game_data, $game_translations]);
+
+	export let data_game;
+	export let data_translations;
+
+	async function get_game_data() {
+		const data = await game_data.get();
+		data_game = data;
+	}
+
+	async function get_translation_data() {
+		const data = await game_translations.get();
+		data_translations = data;
+	}
+
+	get_game_data();
+	get_translation_data();
 </script>
 
 {#await promise}
@@ -26,10 +41,15 @@
 				<Container_Stats />
 			</div>
 			<div class="container_items">
-				<Container_Items />
+				<Container_Items data_items={data_game.items} {data_translations} fold_direction={'down'} heading={"Items"} />
 			</div>
 			<div class="container_weapons">
-				<Container_Weapons />
+				<Container_Items
+					data_items={data_game.weapons}
+					{data_translations}
+					fold_direction={'left_top'}
+					heading={"Weapons"}
+				/>
 			</div>
 		</div>
 	{/if}
@@ -61,5 +81,6 @@
 		grid-row: 3 / 4;
 		align-self: end;
 		z-index: 2;
+		width: 25rem;
 	}
 </style>

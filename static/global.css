@@ -31,6 +31,8 @@ html {
 	--font-primary: Anybody;
 	--border-radius-primary: 10px;
 	--animation-slide-in-values: 0.2s ease-in-out forwards;
+	--item-img-size: 80px;
+	--item-padding: 5px;
 }
 
 /* Sections

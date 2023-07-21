@@ -28,7 +28,7 @@
 
 	.weapons {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, 80px);
+		grid-template-columns: repeat(auto-fit, calc(var(--item-img-size) + var(--item-padding) * 2));
 	}
 
 	.weapon {
