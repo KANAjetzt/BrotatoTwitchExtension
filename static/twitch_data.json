@@ -1,20 +1,20 @@
 {
-	"stat_max_hp": 13,
-	"stat_armor": 5,
-	"stat_crit_chance": 0,
-	"stat_luck": 13,
-	"stat_attack_speed": 1,
-	"stat_elemental_damage": -1,
-	"stat_hp_regeneration": 3,
+	"stat_max_hp": 22,
+	"stat_armor": 3,
+	"stat_crit_chance": 5,
+	"stat_luck": 0,
+	"stat_attack_speed": 0,
+	"stat_elemental_damage": 0,
+	"stat_hp_regeneration": 0,
 	"stat_lifesteal": 0,
 	"stat_melee_damage": 0,
 	"stat_percent_damage": 0,
 	"stat_dodge": 0,
 	"stat_engineering": 0,
-	"stat_range": 0,
+	"stat_range": 30,
 	"stat_ranged_damage": 0,
-	"stat_speed": 0,
-	"stat_harvesting": 5,
+	"stat_speed": 3,
+	"stat_harvesting": 11,
 	"xp_gain": 0,
 	"number_of_enemies": 0,
 	"consumable_heal": 0,
@@ -22,7 +22,7 @@
 	"burning_spread": 0,
 	"piercing": 0,
 	"piercing_damage": 0,
-	"pickup_range": 0,
+	"pickup_range": 30,
 	"chance_double_gold": 0,
 	"bounce": 0,
 	"bounce_damage": 0,
@@ -50,30 +50,49 @@
 	"weapons_price": 0,
 	"weapons": [
 		{
-			"id": "weapon_sword",
-			"tier": 1
+			"id": "weapon_double_barrel_shotgun",
+			"tier": 0
 		},
 		{
-			"id": "weapon_ghost_flint",
-			"tier": 1
+			"id": "weapon_double_barrel_shotgun",
+			"tier": 0
+		},
+		{
+			"id": "weapon_double_barrel_shotgun",
+			"tier": 0
+		},
+		{
+			"id": "weapon_double_barrel_shotgun",
+			"tier": 0
 		}
 	],
 	"items": [
 		{
-			"id": "character_knight",
-			"tier": 0
+			"id": "character_well_rounded",
+			"name": "CHARACTER_WELL_ROUNDED",
+			"tier": 0,
+			"effect_text": {
+				"stat_max_hp": "[color=#00ff00]+5[/color] Max HP",
+				"stat_speed": "[color=#00ff00]+5[/color] % Speed",
+				"stat_harvesting": "[color=#00ff00]+8[/color] Harvesting"
+			}
 		},
 		{
-			"id": "item_ugly_tooth",
-			"tier": 0
+			"id": "item_alien_tongue",
+			"name": "ITEM_ALIEN_TONGUE",
+			"tier": 0,
+			"effect_text": {
+				"pickup_range": "[color=#00ff00]+30%[/color] pickup range"
+			}
 		},
 		{
-			"id": "item_lost_duck",
-			"tier": 0
-		},
-		{
-			"id": "item_mushroom",
-			"tier": 0
+			"id": "item_helmet",
+			"name": "ITEM_HELMET",
+			"tier": 0,
+			"effect_text": {
+				"stat_armor": "[color=#00ff00]+1[/color] Armor",
+				"stat_speed": "[color=red]-2[/color] % Speed"
+			}
 		}
 	]
 }
