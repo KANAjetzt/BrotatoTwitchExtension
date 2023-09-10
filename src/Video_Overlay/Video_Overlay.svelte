@@ -13,7 +13,9 @@
 
 			// Update game_data store
 			$game_data.items = data.items;
+			delete data.items;
 			$game_data.weapons = data.weapons;
+			delete data.weapons;
 
 			// Get primary stats
 			for (const [key, value] of Object.entries(data)) {
