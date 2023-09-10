@@ -7,23 +7,16 @@
 	import Container from '../Container/Container.svelte';
 	import InfoStat from '../Info_Stat/Info_Stat.svelte';
 
-	let data_stats_primary;
-	let data_stats_secondary;
+	$: data_stats_primary = $game_data?.stats_primary;
+	$: data_stats_secondary = $game_data?.stats_secondary;
 	let data_translations;
 	let current_stat_view = 'primary';
-
-	async function get_game_data() {
-		const data = await game_data.get();
-		data_stats_primary = data.stats_primary;
-		data_stats_secondary = data.stats_secondary;
-	}
 
 	async function get_translation_data() {
 		const data = await game_translations.get();
 		data_translations = data;
 	}
 
-	get_game_data();
 	get_translation_data();
 </script>
 

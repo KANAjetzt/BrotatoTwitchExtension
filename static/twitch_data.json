@@ -1,0 +1,79 @@
+{
+	"stat_max_hp": 13,
+	"stat_armor": 5,
+	"stat_crit_chance": 0,
+	"stat_luck": 13,
+	"stat_attack_speed": 1,
+	"stat_elemental_damage": -1,
+	"stat_hp_regeneration": 3,
+	"stat_lifesteal": 0,
+	"stat_melee_damage": 0,
+	"stat_percent_damage": 0,
+	"stat_dodge": 0,
+	"stat_engineering": 0,
+	"stat_range": 0,
+	"stat_ranged_damage": 0,
+	"stat_speed": 0,
+	"stat_harvesting": 5,
+	"xp_gain": 0,
+	"number_of_enemies": 0,
+	"consumable_heal": 0,
+	"burning_cooldown_reduction": 0,
+	"burning_spread": 0,
+	"piercing": 0,
+	"piercing_damage": 0,
+	"pickup_range": 0,
+	"chance_double_gold": 0,
+	"bounce": 0,
+	"bounce_damage": 0,
+	"heal_when_pickup_gold": 0,
+	"item_box_gold": 0,
+	"knockback": 0,
+	"hp_cap": 999999,
+	"speed_cap": 999999,
+	"lose_hp_per_second": 0,
+	"map_size": 0,
+	"dodge_cap": 60,
+	"gold_drops": 100,
+	"enemy_health": 0,
+	"enemy_damage": 0,
+	"enemy_speed": 0,
+	"boss_strength": 0,
+	"explosion_size": 0,
+	"explosion_damage": 0,
+	"damage_against_bosses": 0,
+	"giant_crit_damage": 0,
+	"weapon_slot": 6,
+	"items_price": 0,
+	"harvesting_growth": 5,
+	"hit_protection": 0,
+	"weapons_price": 0,
+	"weapons": [
+		{
+			"id": "weapon_sword",
+			"tier": 1
+		},
+		{
+			"id": "weapon_ghost_flint",
+			"tier": 1
+		}
+	],
+	"items": [
+		{
+			"id": "character_knight",
+			"tier": 0
+		},
+		{
+			"id": "item_ugly_tooth",
+			"tier": 0
+		},
+		{
+			"id": "item_lost_duck",
+			"tier": 0
+		},
+		{
+			"id": "item_mushroom",
+			"tier": 0
+		}
+	]
+}

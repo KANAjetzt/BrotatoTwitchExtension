@@ -4,31 +4,57 @@
 	import Container_Stats from './../Components/Container_Stats/Container_Stats.svelte';
 	import Container_Items from './../Components/Container_Items/Container_Items.svelte';
 
-	// let id = undefined;
+	onMount(() => {
+		console.log('mounted');
 
-	// onMount(() => {
-	// 		window.Twitch.ext.onAuthorized(function () {
-	// 				const config = window.Twitch.ext.configuration.broadcaster.content;
-	// 				id = new URL(config).pathname.split("/")[2];
-	// 		});
-	// });
+		setInterval(async () => {
+			const result = await fetch('/static/twitch_data.json');
+			const data = await result.json();
 
-	let promise = Promise.all([$game_data, $game_translations]);
+			// Update game_data store
+			$game_data.items = data.items;
+			$game_data.weapons = data.weapons;
 
-	export let data_game;
+			// Get primary stats
+			for (const [key, value] of Object.entries(data)) {
+				if (key.startsWith('stat')) {
+					$game_data.stats_primary[key] = value;
+				} else {
+					$game_data.stats_secondary[key] = value;
+				}
+			}
+		}, 1000 * 5);
+
+		// window.Twitch.ext.listen('broadcast', (target, contentType, message) => {
+		// 	console.log('listening');
+		// 	console.log(message);
+
+		// 	const data = JSON.parse(message);
+
+		// 	// Update game_data store
+		// 	game_data.items = data.items;
+		// 	game_data.weapons = data.weapons;
+
+		// 	// Get primary stats
+		// 	for (const [key, value] of Object.entries(data)) {
+		// 		if (key.startsWith('stat')) {
+		// 			game_data.stats_primary[key] = value;
+		// 		} else {
+		// 			game_data.stats_secondary[key] = value;
+		// 		}
+		// 	}
+		// });
+	});
+
+	let promise = Promise.all([$game_translations]);
+
 	export let data_translations;
-
-	async function get_game_data() {
-		const data = await game_data.get();
-		data_game = data;
-	}
 
 	async function get_translation_data() {
 		const data = await game_translations.get();
 		data_translations = data;
 	}
 
-	get_game_data();
 	get_translation_data();
 </script>
 
@@ -42,7 +68,7 @@
 			</div>
 			<div class="container_items">
 				<Container_Items
-					data_items={data_game.items}
+					data_items={$game_data.items}
 					{data_translations}
 					fold_direction={'down'}
 					heading={'Items'}
@@ -50,7 +76,7 @@
 			</div>
 			<div class="container_weapons">
 				<Container_Items
-					data_items={data_game.weapons}
+					data_items={$game_data.weapons}
 					{data_translations}
 					fold_direction={'left_top'}
 					heading={'Weapons'}
@@ -68,8 +94,6 @@
 		width: 100vw;
 		height: 100vh;
 		align-items: center;
-		background-image: url('/static/test_bg.png');
-		background-size: cover;
 	}
 
 	.container_stats {

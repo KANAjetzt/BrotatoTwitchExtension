@@ -1,10 +1,12 @@
 <script>
+	import { fade } from 'svelte/transition';
+
 	export let img_src = '';
 	export let img_alt = '';
 	export let tier = '';
 </script>
 
-<div class="item bg_{tier}">
+<div class="item bg_{tier}" transition:fade={{ duration: 150 }}>
 	<img src={img_alt !== '' ? img_src : '/static/blob.png'} alt={img_alt} />
 </div>
 
