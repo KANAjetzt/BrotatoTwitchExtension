@@ -37,10 +37,23 @@ html {
 	--container-bg-color: hsla(0, 0%, 19%, 0.75);
 	--btn-bg-color: hsla(0, 0%, 85%, 0.25);
 	--item-bg-alpha: 0.4;
-	--item-bg-0: hsla(0, 0%, 90%, var(--item-bg-alpha));
-	--item-bg-1: hsla(204, 100%, 68%, var(--item-bg-alpha));
-	--item-bg-2: hsla(270, 100%, 68%, var(--item-bg-alpha));
-	--item-bg-3: hsla(0, 100%, 62%, var(--item-bg-alpha));
+	--tooltip-bg-alpha: 1;
+	--bg-0-values: 0, 0%, 90%;
+	--bg-1-values: 204, 100%, 68%;
+	--bg-2-values: 270, 100%, 68%;
+	--bg-3-values: 0, 100%, 62%;
+	--tooltip-bg-0-values: 0, 0%, 5%;
+	--tooltip-bg-1-values: 197, 50.18%, 10.17%;
+	--tooltip-bg-2-values: 261, 45.95%, 7.25%;
+	--tooltip-bg-3-values: 0, 60%, 8.82%;
+	--item-bg-0: hsla(var(--bg-0-values), var(--item-bg-alpha));
+	--item-bg-1: hsla(var(--bg-1-values), var(--item-bg-alpha));
+	--item-bg-2: hsla(var(--bg-2-values), var(--item-bg-alpha));
+	--item-bg-3: hsla(var(--bg-3-values), var(--item-bg-alpha));
+	--tooltip-bg-0: hsla(var(--tooltip-bg-0-values), var(--tooltip-bg-alpha));
+	--tooltip-bg-1: hsla(var(--tooltip-bg-1-values), var(--tooltip-bg-alpha));
+	--tooltip-bg-2: hsla(var(--tooltip-bg-2-values), var(--tooltip-bg-alpha));
+	--tooltip-bg-3: hsla(var(--tooltip-bg-3-values), var(--tooltip-bg-alpha));
 	--scrollbar-color-primary: hsla(0, 0%, 36%, 0.466);
 	--scrollbar-color-secondary: hsla(0, 0%, 85%, 0.25);
 	--scrollbar-color-secondary-a-50: hsla(0, 0%, 85%, 0.5);
@@ -79,7 +92,8 @@ h5,
 h6,
 p,
 a,
-button {
+button,
+li {
 	font-family: var(--font-primary);
 	margin: 0;
 	padding: 0;

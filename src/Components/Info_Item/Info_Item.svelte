@@ -1,13 +1,34 @@
 <script>
 	import { fade } from 'svelte/transition';
+	import TooltipItems from '../Tooltip_Items/Tooltip_Items.svelte';
 
+	export let id = '';
+	export let name = '';
 	export let img_src = '';
-	export let img_alt = '';
 	export let tier = '';
+	export let effect_text = {};
+
+	let show_tooltip = false;
 </script>
 
-<div class="item bg_{tier}" transition:fade={{ duration: 150 }}>
-	<img src={img_alt !== '' ? img_src : '/static/blob.png'} alt={img_alt} />
+<div
+	class="item bg_{tier}"
+	on:pointerenter={(e) => {
+		if (show_tooltip == false) {
+			show_tooltip = true;
+		}
+	}}
+	on:pointerleave={(e) => {
+		if (show_tooltip == true) {
+			show_tooltip = false;
+		}
+	}}
+	transition:fade={{ duration: 150 }}
+>
+	<img src={img_src !== '' ? img_src : '/static/blob.png'} alt={name === '' ? id : name} />
+	{#if show_tooltip && !id.startsWith('weapon')}
+		<TooltipItems {effect_text} {img_src} {name} {tier} />
+	{/if}
 </div>
 
 <style>

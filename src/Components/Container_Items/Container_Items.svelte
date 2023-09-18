@@ -1,5 +1,4 @@
 <script>
-	import { game_data, game_translations } from '../../stores.js';
 	import { get_translated_string, get_icon_path } from '../../utils.js';
 	import Info_Item from './../Info_Item/Info_Item.svelte';
 	import Container from '../Container/Container.svelte';
@@ -17,9 +16,11 @@
 			{#if data_items}
 				{#each data_items as item}
 					<Info_Item
+						name={item.name ? get_translated_string(data_translations, item.name, 'en') : ''}
+						id={item.id}
 						img_src={get_icon_path(item.id)}
-						img_alt={get_translated_string(data_translations, item.id, 'en')}
 						tier={item.tier}
+						effect_text={item.effect_text}
 					/>
 				{/each}
 			{/if}
