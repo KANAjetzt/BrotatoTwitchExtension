@@ -2,6 +2,8 @@
 	import bbobHTML from '@bbob/html';
 	import presetHTML5 from '@bbob/preset-html5';
 	import { getUniqAttr } from '@bbob/plugin-helper';
+	import { fly } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
 
 	export let tier = '';
 	export let img_src = '';
@@ -32,8 +34,11 @@
 	}
 </script>
 
-<div class={`tooltip tooltip_bg_${tier}`}>
-	<div class="top">
+<div
+	class={`tooltip tooltip_bg_${tier}`}
+	transition:fly={{ duration: 150, y: 10, easing: cubicOut }}
+>
+	<div class="top" style={`position: `}>
 		<img class={`bg_${tier}`} src={img_src !== '' ? img_src : '/static/blob.png'} alt={name} />
 		<h4>{name}</h4>
 	</div>
@@ -50,11 +55,13 @@
 		bottom: 8rem;
 		padding: 1rem;
 		min-width: 15rem;
+		transform: translate3d(33%, 0, 0);
 		background-color: #333333f0;
 		border-radius: var(--border-radius-primary);
 		display: grid;
 		grid-template-rows: max-content 1fr;
 		align-items: center;
+		pointer-events: none;
 	}
 
 	.top {
