@@ -1,20 +1,20 @@
 {
-	"stat_max_hp": 21,
-	"stat_armor": -1,
-	"stat_crit_chance": 9,
-	"stat_luck": 15,
-	"stat_attack_speed": 7,
+	"stat_max_hp": 10,
+	"stat_armor": 0,
+	"stat_crit_chance": 0,
+	"stat_luck": 0,
+	"stat_attack_speed": 0,
 	"stat_elemental_damage": 0,
 	"stat_hp_regeneration": 0,
 	"stat_lifesteal": 0,
-	"stat_melee_damage": 4,
-	"stat_percent_damage": 3,
+	"stat_melee_damage": 0,
+	"stat_percent_damage": 0,
 	"stat_dodge": 0,
 	"stat_engineering": 0,
 	"stat_range": 0,
 	"stat_ranged_damage": 0,
-	"stat_speed": 5,
-	"stat_harvesting": 27,
+	"stat_speed": 0,
+	"stat_harvesting": 0,
 	"xp_gain": 0,
 	"number_of_enemies": 0,
 	"consumable_heal": 0,
@@ -49,69 +49,9 @@
 	"hit_protection": 0,
 	"weapons_price": 0,
 	"weapons": [
-		{
-			"id": "weapon_knife",
-			"tier": 0
-		},
-		{
-			"id": "weapon_knife",
-			"tier": 0
-		},
-		{
-			"id": "weapon_knife",
-			"tier": 0
-		},
-		{
-			"id": "weapon_knife",
-			"tier": 0
-		}
+
 	],
 	"items": [
-		{
-			"id": "character_well_rounded",
-			"name": "CHARACTER_WELL_ROUNDED",
-			"tier": 0,
-			"effect_text": {
-				"stat_max_hp": "[color=#00ff00]+5[/color] Max HP",
-				"stat_speed": "[color=#00ff00]+5[/color] % Speed",
-				"stat_harvesting": "[color=#00ff00]+8[/color] Harvesting"
-			}
-		},
-		{
-			"id": "item_coffee",
-			"name": "ITEM_COFFEE",
-			"tier": 0,
-			"effect_text": {
-				"stat_attack_speed": "[color=#00ff00]+10[/color] % Attack Speed",
-				"stat_percent_damage": "[color=red]-2[/color] % Damage"
-			}
-		},
-		{
-			"id": "item_lumberjack_shirt",
-			"name": "ITEM_LUMBERJACK_SHIRT",
-			"tier": 0,
-			"effect_text": {
-				"one_shot_trees": "Trees die in one hit"
-			}
-		},
-		{
-			"id": "item_defective_steroids",
-			"name": "ITEM_DEFECTIVE_STEROIDS",
-			"tier": 0,
-			"effect_text": {
-				"stat_max_hp": "[color=#00ff00]+2[/color] Max HP",
-				"stat_melee_damage": "[color=#00ff00]+2[/color] Melee Damage",
-				"stat_attack_speed": "[color=red]-3[/color] % Attack Speed"
-			}
-		},
-		{
-			"id": "item_wheelbarrow",
-			"name": "ITEM_WHEELBARROW",
-			"tier": 1,
-			"effect_text": {
-				"stat_harvesting": "[color=#00ff00]+16[/color] Harvesting",
-				"stat_armor": "[color=red]-1[/color] Armor"
-			}
-		}
+
 	]
 }

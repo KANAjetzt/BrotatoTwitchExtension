@@ -1,8 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
-	import { game_data, game_translations } from './../stores.js';
+	import { app_store, game_data, game_translations } from './../stores.js';
 	import Container_Stats from './../Components/Container_Stats/Container_Stats.svelte';
 	import Container_Items from './../Components/Container_Items/Container_Items.svelte';
+	import TooltipItems from '../Components/Tooltip_Items/Tooltip_Items.svelte';
 
 	onMount(() => {
 		console.log('mounted');
@@ -84,6 +85,9 @@
 					heading={'Weapons'}
 				/>
 			</div>
+			{#if $app_store.show_tooltip}
+				<TooltipItems />
+			{/if}
 		</div>
 	{/if}
 {/await}

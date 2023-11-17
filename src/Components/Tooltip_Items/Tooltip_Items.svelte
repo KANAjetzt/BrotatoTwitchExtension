@@ -4,11 +4,11 @@
 	import { getUniqAttr } from '@bbob/plugin-helper';
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
+	import { onMount } from 'svelte';
+	import { app_store } from './../../stores.js';
 
-	export let tier = '';
-	export let img_src = '';
-	export let name = '';
-	export let effect_text = {};
+	let tooltip;
+	let previous_item_name = '';
 
 	$: html_effect_text = handle_effect_text();
 
@@ -23,10 +23,35 @@
 		})
 	}));
 
+	onMount(() => {
+		position_tooltip();
+	});
+
+	app_store.subscribe((new_value) => {
+		if (!tooltip) {
+			return;
+		}
+		if (previous_item_name === '' || previous_item_name !== new_value.tooltip_data.name) {
+			previous_item_name = new_value.tooltip_data.name;
+			html_effect_text = handle_effect_text();
+			position_tooltip();
+		}
+
+		previous_item_name = new_value.tooltip_data.name;
+	});
+
+	function position_tooltip() {
+		tooltip.style.setProperty('--position-x', `${$app_store.tooltip_data.position.x}px`);
+		tooltip.style.setProperty(
+			'--position-y',
+			`${$app_store.tooltip_data.position.y - tooltip.clientHeight}px`
+		);
+	}
+
 	function handle_effect_text() {
 		const effect_html = [];
 
-		for (const effect_bbcode of Object.values(effect_text)) {
+		for (const effect_bbcode of Object.values($app_store.tooltip_data.effect_text)) {
 			effect_html.push(bbobHTML(effect_bbcode, my_preset()));
 		}
 
@@ -35,12 +60,19 @@
 </script>
 
 <div
-	class={`tooltip tooltip_bg_${tier}`}
+	class={`tooltip tooltip_bg_${$app_store.tooltip_data.tier}`}
 	transition:fly={{ duration: 150, y: 10, easing: cubicOut }}
+	bind:this={tooltip}
 >
-	<div class="top" style={`position: `}>
-		<img class={`bg_${tier}`} src={img_src !== '' ? img_src : '/static/blob.png'} alt={name} />
-		<h4>{name}</h4>
+	<div class="top">
+		<img
+			class={`bg_${$app_store.tooltip_data.tier}`}
+			src={$app_store.tooltip_data.img_src !== ''
+				? $app_store.tooltip_data.img_src
+				: '/static/blob.png'}
+			alt={$app_store.tooltip_data.name}
+		/>
+		<h4>{$app_store.tooltip_data.name}</h4>
 	</div>
 	<ul>
 		{#each html_effect_text as effect_info_html}
@@ -51,17 +83,19 @@
 
 <style>
 	.tooltip {
-		position: absolute;
-		bottom: 8rem;
+		position: fixed;
+		top: var(--position-y);
+		left: var(--position-x);
 		padding: 1rem;
 		min-width: 15rem;
-		transform: translate3d(33%, 0, 0);
+		max-width: 20rem;
 		background-color: #333333f0;
 		border-radius: var(--border-radius-primary);
 		display: grid;
 		grid-template-rows: max-content 1fr;
 		align-items: center;
 		pointer-events: none;
+		z-index: 200;
 	}
 
 	.top {
