@@ -16,11 +16,13 @@
 			{#if data_items}
 				{#each data_items as item}
 					<Info_Item
-						name={item.name ? get_translated_string(data_translations, item.name, 'en') : ''}
+						name={item.name}
 						id={item.id}
+						set={item.set ? item.set : ''}
 						img_src={get_icon_path(item.id)}
 						tier={item.tier}
 						effect_text={item.effects}
+						stat_text={item.stats}
 						count={item.count}
 					/>
 				{/each}

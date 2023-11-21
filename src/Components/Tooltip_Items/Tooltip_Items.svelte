@@ -10,7 +10,8 @@
 	let tooltip;
 	let previous_item_name = '';
 
-	$: html_effect_text = handle_effect_text();
+	$: html_effect_text = handle_bb_code($app_store.tooltip_data.effect_text);
+	$: html_stat_text = handle_bb_code($app_store.tooltip_data.stat_text);
 
 	const my_preset = presetHTML5.extend((tags) => ({
 		...tags,
@@ -33,10 +34,12 @@
 		}
 		if (previous_item_name === '' || previous_item_name !== new_value.tooltip_data.name) {
 			previous_item_name = new_value.tooltip_data.name;
-			html_effect_text = handle_effect_text();
+			html_effect_text = handle_bb_code($app_store.tooltip_data.effect_text);
+			html_stat_text = handle_bb_code($app_store.tooltip_data.stat_text);
 			position_tooltip();
 		}
 
+		console.log(new_value.tooltip_data);
 		previous_item_name = new_value.tooltip_data.name;
 	});
 
@@ -48,15 +51,19 @@
 		);
 	}
 
-	function handle_effect_text() {
-		const effect_html = [];
-		const bb_code = $app_store.tooltip_data.effect_text.split('\n');
-
-		for (const effect_bbcode of bb_code) {
-			effect_html.push(bbobHTML(effect_bbcode, my_preset()));
+	function handle_bb_code(text) {
+		if (!text) {
+			return;
 		}
 
-		return effect_html;
+		const html = [];
+		const bb_code_split = text.split('\n');
+
+		for (const bb_code of bb_code_split) {
+			html.push(bbobHTML(bb_code, my_preset()));
+		}
+
+		return html;
 	}
 </script>
 
@@ -71,13 +78,25 @@
 			src={$app_store.tooltip_data.img_src !== '' ? $app_store.tooltip_data.img_src : '/blob.png'}
 			alt={$app_store.tooltip_data.name}
 		/>
-		<h4>{$app_store.tooltip_data.name}</h4>
+		<div class="right">
+			<h4>{$app_store.tooltip_data.name}</h4>
+			<h5>{$app_store.tooltip_data.set}</h5>
+		</div>
 	</div>
-	<ul>
-		{#each html_effect_text as effect_info_html}
-			<li>{@html effect_info_html}</li>
-		{/each}
-	</ul>
+	{#if html_stat_text}
+		<ul>
+			{#each html_stat_text as stat_info_html}
+				<li>{@html stat_info_html}</li>
+			{/each}
+		</ul>
+	{/if}
+	{#if html_effect_text}
+		<ul>
+			{#each html_effect_text as effect_info_html}
+				<li>{@html effect_info_html}</li>
+			{/each}
+		</ul>
+	{/if}
 </div>
 
 <style>
@@ -98,8 +117,8 @@
 	}
 
 	.top {
-		display: flex;
-		align-items: center;
+		display: grid;
+		grid-template-columns: max-content 1fr;
 		gap: 1rem;
 	}
 
@@ -111,7 +130,14 @@
 	}
 
 	h4 {
-		justify-self: start;
+		font-size: 1.3rem;
+		font-weight: 300;
+	}
+
+	h5 {
+		font-size: 1.1rem;
+		font-weight: 300;
+		color: var(--font-color-secondary);
 	}
 
 	ul {

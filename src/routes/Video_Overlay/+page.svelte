@@ -25,11 +25,11 @@
 				return accumulator;
 			}, {});
 
-			data.items = Object.values(item_data)
+			data.items = Object.values(item_data);
 
 			$game_data = data;
 
-			console.log($game_data)
+			console.log($game_data);
 		}, 1000 * 1.5);
 
 		// window.Twitch.ext.listen('broadcast', (target, contentType, message) => {

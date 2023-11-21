@@ -7,7 +7,9 @@ export const app_store = writable({
 		tier: '',
 		img_src: '',
 		name: '',
-		effect_text: {},
+		set: '',
+		effect_text: '',
+		stat_text: '',
 		position: {}
 	}
 });

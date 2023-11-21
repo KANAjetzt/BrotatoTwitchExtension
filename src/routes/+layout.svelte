@@ -35,6 +35,7 @@
 	:global(:root) {
 		--font-primary: Anybody;
 		--font-color-primary: #eee;
+		--font-color-secondary: #EAE2B0;
 		--border-radius-primary: 10px;
 		--animation-slide-in-values: 0.2s ease-in-out forwards;
 		--item-img-size: 80px;

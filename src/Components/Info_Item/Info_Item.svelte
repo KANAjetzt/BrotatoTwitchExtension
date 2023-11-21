@@ -4,16 +4,18 @@
 
 	export let id = '';
 	export let name = '';
+	export let set = '';
 	export let img_src = '';
 	export let tier = '';
-	export let effect_text = {};
+	export let effect_text = '';
+	export let stat_text = '';
 	export let count = 1;
 </script>
 
 <div
 	class="item bg_{tier}"
 	on:pointerenter={(e) => {
-		if ($app_store.show_tooltip == false && !id.startsWith('weapon')) {
+		if ($app_store.show_tooltip == false) {
 			var target_position = {
 				x: e.target.getBoundingClientRect().x,
 				y: e.target.getBoundingClientRect().y
@@ -25,7 +27,9 @@
 				tier,
 				img_src,
 				name,
+				set,
 				effect_text,
+				stat_text,
 				position: target_position
 			};
 		}
