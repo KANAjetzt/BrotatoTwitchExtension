@@ -7,6 +7,7 @@
 	export let img_src = '';
 	export let tier = '';
 	export let effect_text = {};
+	export let count = 1;
 </script>
 
 <div
@@ -27,8 +28,6 @@
 				effect_text,
 				position: target_position
 			};
-
-			console.log($app_store.tooltip_data);
 		}
 	}}
 	on:pointerleave={(e) => {
@@ -39,16 +38,27 @@
 	transition:fade={{ duration: 150 }}
 >
 	<img src={img_src !== '' ? img_src : '/blob.png'} alt={name === '' ? id : name} />
+	{#if count > 1}
+		<p>x{count}</p>
+	{/if}
 </div>
 
 <style>
 	img {
 		width: var(--item-img-size);
 		height: var(--item-img-size);
+		grid-row: 1 / 4;
+		grid-column: 1 / 4;
+	}
+
+	p {
+		grid-row: 3 / 4;
+		grid-column: 3 / 4;
+		font-size: 24px;
 	}
 
 	.item {
-		display: flex;
+		display: grid;
 		align-items: center;
 		justify-content: center;
 		padding: var(--item-padding);

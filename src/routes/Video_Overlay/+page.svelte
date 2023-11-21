@@ -13,9 +13,23 @@
 			const result = await fetch('/api/update');
 			const data = await result.json();
 
-			console.log(data);
+			// Count all multiples of items
+			const item_data = data.items.reduce((accumulator, current_value) => {
+				if (!accumulator.hasOwnProperty(current_value.id)) {
+					current_value.count = 1;
+					accumulator[current_value.id] = current_value;
+				} else {
+					accumulator[current_value.id].count = accumulator[current_value.id].count + 1;
+				}
+
+				return accumulator;
+			}, {});
+
+			data.items = Object.values(item_data)
 
 			$game_data = data;
+
+			console.log($game_data)
 		}, 1000 * 1.5);
 
 		// window.Twitch.ext.listen('broadcast', (target, contentType, message) => {

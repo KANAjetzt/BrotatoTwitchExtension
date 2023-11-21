@@ -21,6 +21,7 @@
 						img_src={get_icon_path(item.id)}
 						tier={item.tier}
 						effect_text={item.effects}
+						count={item.count}
 					/>
 				{/each}
 			{/if}
