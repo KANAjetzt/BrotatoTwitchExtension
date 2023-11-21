@@ -1,7 +1,6 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { app_store } from './../../stores.js';
-	import TooltipItems from '../Tooltip_Items/Tooltip_Items.svelte';
 
 	export let id = '';
 	export let name = '';
@@ -28,6 +27,8 @@
 				effect_text,
 				position: target_position
 			};
+
+			console.log($app_store.tooltip_data);
 		}
 	}}
 	on:pointerleave={(e) => {
@@ -37,7 +38,7 @@
 	}}
 	transition:fade={{ duration: 150 }}
 >
-	<img src={img_src !== '' ? img_src : '/static/blob.png'} alt={name === '' ? id : name} />
+	<img src={img_src !== '' ? img_src : '/blob.png'} alt={name === '' ? id : name} />
 </div>
 
 <style>

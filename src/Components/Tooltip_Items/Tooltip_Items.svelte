@@ -50,8 +50,9 @@
 
 	function handle_effect_text() {
 		const effect_html = [];
+		const bb_code = $app_store.tooltip_data.effect_text.split('\n');
 
-		for (const effect_bbcode of Object.values($app_store.tooltip_data.effect_text)) {
+		for (const effect_bbcode of bb_code) {
 			effect_html.push(bbobHTML(effect_bbcode, my_preset()));
 		}
 
@@ -67,9 +68,7 @@
 	<div class="top">
 		<img
 			class={`bg_${$app_store.tooltip_data.tier}`}
-			src={$app_store.tooltip_data.img_src !== ''
-				? $app_store.tooltip_data.img_src
-				: '/static/blob.png'}
+			src={$app_store.tooltip_data.img_src !== '' ? $app_store.tooltip_data.img_src : '/blob.png'}
 			alt={$app_store.tooltip_data.name}
 		/>
 		<h4>{$app_store.tooltip_data.name}</h4>

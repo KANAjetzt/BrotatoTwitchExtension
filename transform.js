@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 
-// Used to transform the converted translations (from csv to json) into a more usefull format to look up the translations.
+// Used to transform the converted translations from csv to json
 function transform() {
 	const new_data = {};
 

@@ -6,27 +6,12 @@
 	import TooltipItems from '../Components/Tooltip_Items/Tooltip_Items.svelte';
 
 	onMount(() => {
-		console.log('mounted');
-
 		setInterval(async () => {
-			const result = await fetch('/static/twitch_data.json');
+			const result = await fetch('/twitch_data.json');
 			const data = await result.json();
 
-			// Update game_data store
-			$game_data.items = data.items;
-			delete data.items;
-			$game_data.weapons = data.weapons;
-			delete data.weapons;
 
-			// Get primary stats
-			for (const [key, value] of Object.entries(data)) {
-				if (key.startsWith('stat')) {
-					$game_data.stats_primary[key] = value;
-				} else {
-					$game_data.stats_secondary[key] = value;
-				}
-			}
-		}, 1000 * 5);
+		}, 1000 * 1.5);
 
 		// window.Twitch.ext.listen('broadcast', (target, contentType, message) => {
 		// 	console.log('listening');
@@ -49,14 +34,16 @@
 		// });
 	});
 
-	let promise = Promise.all([$game_translations]);
-
 	export let data_translations;
+
+	let promise = Promise.all([$game_translations]);
 
 	async function get_translation_data() {
 		const data = await game_translations.get();
 		data_translations = data;
 	}
+
+
 
 	get_translation_data();
 </script>

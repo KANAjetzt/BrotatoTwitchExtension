@@ -49,7 +49,7 @@
 				>
 					{#each Object.keys(data_stats_primary) as stat_primary}
 						<InfoStat
-							img_src={`static/stat_icons/${get_stat_icon_name(stat_primary)}`}
+							img_src={`/stat_icons/${get_stat_icon_name(stat_primary)}`}
 							stat_text={data_translations[`${stat_primary.toUpperCase()}`].en}
 							stat_value={data_stats_primary[stat_primary]}
 						/>
