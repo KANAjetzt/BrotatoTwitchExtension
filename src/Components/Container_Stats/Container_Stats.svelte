@@ -7,7 +7,7 @@
 	import Container from '../Container/Container.svelte';
 	import InfoStat from '../Info_Stat/Info_Stat.svelte';
 
-	$: data_stats_primary = $game_data?.stats_primary;
+	$: data_stats_primary = stats_primary_sorting($game_data?.stats_primary);
 	$: data_stats_secondary = $game_data?.stats_secondary;
 	let data_translations;
 	let current_stat_view = 'primary';
@@ -15,6 +15,30 @@
 	async function get_translation_data() {
 		const data = await game_translations.get();
 		data_translations = data;
+	}
+
+	function stats_primary_sorting(stats_data) {
+		if (Object.keys(stats_data).length === 0) {
+			return;
+		}
+		return {
+			stat_max_hp: stats_data.stat_max_hp,
+			stat_hp_regeneration: stats_data.stat_hp_regeneration,
+			stat_lifesteal: stats_data.stat_lifesteal,
+			stat_percent_damage: stats_data.stat_percent_damage,
+			stat_melee_damage: stats_data.stat_melee_damage,
+			stat_ranged_damage: stats_data.stat_ranged_damage,
+			stat_elemental_damage: stats_data.stat_elemental_damage,
+			stat_attack_speed: stats_data.stat_attack_speed,
+			stat_crit_chance: stats_data.stat_crit_chance,
+			stat_engineering: stats_data.stat_engineering,
+			stat_range: stats_data.stat_range,
+			stat_armor: stats_data.stat_armor,
+			stat_dodge: stats_data.stat_dodge,
+			stat_speed: stats_data.stat_speed,
+			stat_luck: stats_data.stat_luck,
+			stat_harvesting: stats_data.stat_harvesting
+		};
 	}
 
 	get_translation_data();
