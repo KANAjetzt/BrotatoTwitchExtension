@@ -21,6 +21,15 @@
 				style: `color: ${getUniqAttr(node.attrs)}`
 			},
 			content: node.content
+		}),
+		img: (node) => ({
+			tag: 'img',
+			attrs: {
+				src: `${node.content}`,
+				width: `${getUniqAttr(node.attrs).split('x')[0]}px`,
+				height: `${getUniqAttr(node.attrs).split('x')[1]}px`,
+				style: `margin-bottom: -5px`
+			}
 		})
 	}));
 
@@ -39,7 +48,6 @@
 			position_tooltip();
 		}
 
-		console.log(new_value.tooltip_data);
 		previous_item_name = new_value.tooltip_data.name;
 	});
 
@@ -60,7 +68,8 @@
 		const bb_code_split = text.split('\n');
 
 		for (const bb_code of bb_code_split) {
-			html.push(bbobHTML(bb_code, my_preset()));
+			const bb_code_replaced_icon_path = bb_code.replaceAll('res://items/stats', 'stat_icons');
+			html.push(bbobHTML(bb_code_replaced_icon_path, my_preset()));
 		}
 
 		return html;
