@@ -1,21 +1,14 @@
-import { json } from '@sveltejs/kit';
+let temp_image_base64 = [];
 
 let game_data = {
 	stats_primary: {},
 	stats_secondary: {},
 	items: [],
-	weapons: []
+	weapons: [],
+	stored_images: {}
 };
 
-export async function GET() {
-	return json(game_data);
-}
-
-export async function POST({ request }) {
-	const data = await request.json();
-
-	console.log(data);
-
+export async function data_handler(data) {
 	data.forEach((update_data) => {
 		const { action, data } = update_data;
 		switch (action) {
@@ -31,6 +24,15 @@ export async function POST({ request }) {
 			case 'stats_update':
 				stats_update(data);
 				break;
+			case 'image_upload':
+				image_upload(data);
+				break;
+			case 'image_upload_start':
+				image_upload_start(data);
+				break;
+			case 'image_upload_end':
+				image_upload_end(data);
+				break;
 			case 'clear_all':
 				clear_all();
 				break;
@@ -40,7 +42,7 @@ export async function POST({ request }) {
 		}
 	});
 
-	return json(game_data);
+	return game_data;
 }
 
 function item_add(data) {
@@ -72,11 +74,28 @@ function stats_update(data) {
 	}
 }
 
+function image_upload(data) {
+	temp_image_base64.push(data.base64_chunks);
+}
+
+function image_upload_start(data) {
+	temp_image_base64.push(data.base64_chunks);
+}
+
+function image_upload_end(data) {
+	const { item_id, base64_chunks } = data;
+	temp_image_base64.push(base64_chunks);
+	game_data.stored_images[item_id] = temp_image_base64.join('');
+	temp_image_base64 = [];
+	console.log(game_data);
+}
+
 function clear_all() {
 	game_data = {
 		stats_primary: {},
 		stats_secondary: {},
 		items: [],
-		weapons: []
+		weapons: [],
+		stored_images: {}
 	};
 }

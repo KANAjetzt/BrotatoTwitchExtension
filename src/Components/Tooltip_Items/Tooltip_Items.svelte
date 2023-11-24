@@ -1,7 +1,7 @@
 <script>
 	import bbobHTML from '@bbob/html';
 	import presetHTML5 from '@bbob/preset-html5';
-	import { getUniqAttr } from '@bbob/plugin-helper';
+	import * as plugin_helper from '@bbob/plugin-helper';
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
@@ -18,7 +18,7 @@
 		color: (node) => ({
 			tag: 'color',
 			attrs: {
-				style: `color: ${getUniqAttr(node.attrs)}`
+				style: `color: ${plugin_helper.getUniqAttr(node.attrs)}`
 			},
 			content: node.content
 		}),
@@ -26,8 +26,8 @@
 			tag: 'img',
 			attrs: {
 				src: `${node.content}`,
-				width: `${getUniqAttr(node.attrs).split('x')[0]}px`,
-				height: `${getUniqAttr(node.attrs).split('x')[1]}px`,
+				width: `${plugin_helper.getUniqAttr(node.attrs).split('x')[0]}px`,
+				height: `${plugin_helper.getUniqAttr(node.attrs).split('x')[1]}px`,
 				style: `margin-bottom: -5px`
 			}
 		})

@@ -1,59 +1,48 @@
 <script>
 	import { onMount } from 'svelte';
 	import { app_store, game_data, game_translations } from '../../stores.js';
+	import { data_handler } from '../../data_handler.js';
 	import Container_Stats from '../../Components/Container_Stats/Container_Stats.svelte';
 	import Container_Items from '../../Components/Container_Items/Container_Items.svelte';
-	import TooltipItems from '../../Components/Tooltip_Items/Tooltip_Items.svelte';
+	import Tooltip_Items from '../../Components/Tooltip_Items/Tooltip_Items.svelte';
+
+	export let data_translations;
+
+	function modulate_item_data(item_data) {
+		// Count all multiples of items
+		const new_item_data = item_data.reduce((accumulator, current_value) => {
+			if (!accumulator.hasOwnProperty(current_value.id)) {
+				current_value.count = 1;
+				accumulator[current_value.id] = current_value;
+			} else {
+				accumulator[current_value.id].count = accumulator[current_value.id].count + 1;
+			}
+
+			return accumulator;
+		}, {});
+
+		return Object.values(new_item_data);
+	}
 
 	onMount(async () => {
+		console.log('mounting');
+
 		const data = await game_translations.get();
 		data_translations = data;
 
-		setInterval(async () => {
-			const result = await fetch('/api/update');
-			const data = await result.json();
+		window.Twitch.ext.listen('broadcast', (target, contentType, message) => {
+			console.log('listening');
+			console.log(message);
 
-			// Count all multiples of items
-			const item_data = data.items.reduce((accumulator, current_value) => {
-				if (!accumulator.hasOwnProperty(current_value.id)) {
-					current_value.count = 1;
-					accumulator[current_value.id] = current_value;
-				} else {
-					accumulator[current_value.id].count = accumulator[current_value.id].count + 1;
-				}
+			const data = JSON.parse(message);
 
-				return accumulator;
-			}, {});
+			let new_game_data = data_handler(data);
 
-			data.items = Object.values(item_data);
+			new_game_data.items = modulate_item_data(new_game_data.items);
 
-			$game_data = data;
-
-			console.log($game_data);
-		}, 1000 * 1.5);
-
-		// window.Twitch.ext.listen('broadcast', (target, contentType, message) => {
-		// 	console.log('listening');
-		// 	console.log(message);
-
-		// 	const data = JSON.parse(message);
-
-		// 	// Update game_data store
-		// 	game_data.items = data.items;
-		// 	game_data.weapons = data.weapons;
-
-		// 	// Get primary stats
-		// 	for (const [key, value] of Object.entries(data)) {
-		// 		if (key.startsWith('stat')) {
-		// 			game_data.stats_primary[key] = value;
-		// 		} else {
-		// 			game_data.stats_secondary[key] = value;
-		// 		}
-		// 	}
-		// });
+			$game_data = new_game_data;
+		});
 	});
-
-	export let data_translations;
 </script>
 
 {#if data_translations}
@@ -78,7 +67,7 @@
 			/>
 		</div>
 		{#if $app_store.show_tooltip}
-			<TooltipItems />
+			<Tooltip_Items />
 		{/if}
 	</div>
 {/if}

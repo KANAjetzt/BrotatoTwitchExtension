@@ -1,3 +1,7 @@
+<svelte:head>
+	<script src="https://extension-files.twitch.tv/helper/v1/twitch-ext.min.js"></script>
+</svelte:head>
+
 <slot />
 
 <style>
@@ -5,12 +9,12 @@
 
 	@font-face {
 		font-family: 'Anybody';
-		src: url('fonts/Anybody-Medium/Anybody-Medium.eot');
-		src: url('fonts/Anybody-Medium/Anybody-Medium.eot?#iefix') format('embedded-opentype'),
-			url('fonts/Anybody-Medium/Anybody-Medium.woff2') format('woff2'),
-			url('fonts/Anybody-Medium/Anybody-Medium.woff') format('woff'),
-			url('fonts/Anybody-Medium/Anybody-Medium.ttf') format('truetype'),
-			url('fonts/Anybody-Medium/Anybody-Medium.svg#Anybody-Medium') format('svg');
+		src: url('../fonts/Anybody-Medium/Anybody-Medium.eot');
+		src: url('../fonts/Anybody-Medium/Anybody-Medium.eot?#iefix') format('embedded-opentype'),
+			url('../fonts/Anybody-Medium/Anybody-Medium.woff2') format('woff2'),
+			url('../fonts/Anybody-Medium/Anybody-Medium.woff') format('woff'),
+			url('../fonts/Anybody-Medium/Anybody-Medium.ttf') format('truetype'),
+			url('../fonts/Anybody-Medium/Anybody-Medium.svg#Anybody-Medium') format('svg');
 		font-weight: 500;
 		font-style: normal;
 		font-display: swap;
@@ -35,7 +39,7 @@
 	:global(:root) {
 		--font-primary: Anybody;
 		--font-color-primary: #eee;
-		--font-color-secondary: #EAE2B0;
+		--font-color-secondary: #eae2b0;
 		--border-radius-primary: 10px;
 		--animation-slide-in-values: 0.2s ease-in-out forwards;
 		--item-img-size: 80px;
