@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { app_store, game_data, game_translations } from './../stores.js';
+	import { app_store, game_data, game_data_counted_items, game_translations } from './../stores.js';
 	import { data_handler } from './../data_handler.js';
 	import Container_Stats from './../Components/Container_Stats/Container_Stats.svelte';
 	import Container_Items from './../Components/Container_Items/Container_Items.svelte';
@@ -8,22 +8,6 @@
 
 	export let data_translations;
 	let promise = Promise.all([$game_translations]);
-
-	function modulate_item_data(item_data) {
-		// Count all multiples of items
-		const new_item_data = item_data.reduce((accumulator, current_value) => {
-			if (!accumulator.hasOwnProperty(current_value.id)) {
-				current_value.count = 1;
-				accumulator[current_value.id] = current_value;
-			} else {
-				accumulator[current_value.id].count = accumulator[current_value.id].count + 1;
-			}
-
-			return accumulator;
-		}, {});
-
-		return Object.values(new_item_data);
-	}
 
 	onMount(async () => {
 		console.log('mounting');
@@ -42,10 +26,6 @@
 			const data = JSON.parse(message);
 
 			let new_game_data = data_handler(data);
-
-			if (new_game_data.items) {
-				new_game_data.items = modulate_item_data(new_game_data.items);
-			}
 
 			$game_data = new_game_data;
 
@@ -71,7 +51,7 @@
 			</div>
 			<div class="container_items">
 				<Container_Items
-					data_items={$game_data.items}
+					data_items={$game_data_counted_items.items}
 					{data_translations}
 					fold_direction={'down'}
 					heading={'Items'}
