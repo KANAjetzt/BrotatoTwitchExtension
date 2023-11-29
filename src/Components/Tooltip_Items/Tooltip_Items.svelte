@@ -84,7 +84,7 @@
 	<div class="top">
 		<img
 			class={`bg_${$app_store.tooltip_data.tier}`}
-			src={$app_store.tooltip_data.img_src !== '' ? $app_store.tooltip_data.img_src : '/blob.png'}
+			src={$app_store.tooltip_data.img_src !== '' ? $app_store.tooltip_data.img_src : './blob.png'}
 			alt={$app_store.tooltip_data.name}
 		/>
 		<div class="right">

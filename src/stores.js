@@ -23,7 +23,7 @@ export const game_data = writable({
 
 export const game_translations = asyncable(async () => {
 	// Get Data
-	const result = await fetch('/translations.json');
+	const result = await fetch('translations.json');
 	const data = result.json();
 
 	return data;

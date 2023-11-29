@@ -41,7 +41,7 @@
 	}}
 	transition:fade={{ duration: 150 }}
 >
-	<img src={img_src !== '' ? img_src : '/blob.png'} alt={name === '' ? id : name} />
+	<img src={img_src !== '' ? img_src : './blob.png'} alt={name === '' ? id : name} />
 	{#if count > 1}
 		<p>x{count}</p>
 	{/if}

@@ -18,9 +18,9 @@
 			const weapon_id_split = item_id.split('_');
 			weapon_id_split.splice(weapon_id_split.length - 1, 1);
 			item_id_current = weapon_id_split.join('_');
+		} else {
+			item_id_current = item_id;
 		}
-
-		item_id_current = item_id;
 
 		const translation_string = get_translated_string(data_translations, item_id_current, 'en');
 

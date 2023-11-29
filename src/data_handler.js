@@ -8,7 +8,7 @@ let game_data = {
 	stored_images: {}
 };
 
-export async function data_handler(data) {
+export function data_handler(data) {
 	data.forEach((update_data) => {
 		const { action, data } = update_data;
 		switch (action) {
