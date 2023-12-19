@@ -25,8 +25,8 @@
 		const translation_string = get_translated_string(data_translations, item_id_current, 'en');
 
 		if (translation_string === '') {
-			if ($game_data.stored_images[item_id]) {
-				return `data:image/png;base64, ${$game_data.stored_images[item_id]}`;
+			if ($game_data.stored_images[item_id_current]) {
+				return `data:image/png;base64, ${$game_data.stored_images[item_id_current]}`;
 			}
 
 			return '';
