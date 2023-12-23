@@ -8,6 +8,7 @@
 	export let fold_direction;
 	export let data_items;
 	export let data_translations;
+	export let rows = 1;
 
 	function handle_img_src(item_id) {
 		// item_ids
@@ -39,7 +40,7 @@
 <div class="items_container">
 	<Container {fold_direction}>
 		<h2>{heading}</h2>
-		<div class="items styled_scrollbar">
+		<div class={`items styled_scrollbar row_${rows}`}>
 			{#if data_items}
 				{#each data_items as item}
 					<Info_Item
@@ -72,7 +73,14 @@
 		display: grid;
 		grid-template-columns: repeat(auto-fit, calc(var(--item-img-size) + var(--item-padding) * 2));
 		gap: 1rem;
-		max-height: 13rem;
 		overflow-y: auto;
+	}
+
+	.row_1 {
+		max-height: 6.5rem;
+	}
+
+	.row_2 {
+		max-height: calc(6.5rem * 2);
 	}
 </style>

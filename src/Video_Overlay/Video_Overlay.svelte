@@ -63,6 +63,7 @@
 					{data_translations}
 					fold_direction={'left_top'}
 					heading={'Weapons'}
+					rows={2}
 				/>
 			</div>
 			{#if $app_store.show_tooltip}
