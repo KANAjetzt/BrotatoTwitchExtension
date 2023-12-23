@@ -1,4 +1,4 @@
-let temp_image_base64 = {};
+let temp_image_base64 = new Map();
 
 let game_data = {
 	stats_primary: {},
@@ -11,11 +11,11 @@ let game_data = {
 
 export function data_handler(data) {
 	data.forEach((update_data) => {
-		const { id, action} = update_data;
+		const { id, action } = update_data;
 
 		// Skip if the action has been handled in the past
-		if(id !== "" && Object.hasOwn(game_data.handled_actions, id)){
-			return
+		if (id !== '' && Object.hasOwn(game_data.handled_actions, id)) {
+			return;
 		}
 
 		switch (action) {
@@ -34,12 +34,6 @@ export function data_handler(data) {
 			case 'image_upload':
 				image_upload(update_data);
 				break;
-			case 'image_upload_start':
-				image_upload_start(update_data);
-				break;
-			case 'image_upload_end':
-				image_upload_end(update_data);
-				break;
 			case 'clear_all':
 				clear_all();
 				break;
@@ -53,21 +47,21 @@ export function data_handler(data) {
 }
 
 function item_add(update_data) {
-	const {id, data} = update_data;
+	const { id, data } = update_data;
 
 	game_data?.items.push(data);
-	game_data.handled_actions[id] = data
+	game_data.handled_actions[id] = data;
 }
 
 function weapon_added(update_data) {
-	const { id, data} = update_data;
+	const { id, data } = update_data;
 
 	game_data?.weapons.push(data);
-	game_data.handled_actions[id] = data
+	game_data.handled_actions[id] = data;
 }
 
 function weapon_removed(update_data) {
-	const { id, data} = update_data;
+	const { id, data } = update_data;
 
 	const index_to_remove = game_data.weapons.findIndex((weapon_data) => {
 		if (weapon_data.tier === data.tier && weapon_data.id === data.id) {
@@ -77,11 +71,11 @@ function weapon_removed(update_data) {
 	});
 
 	game_data.weapons.splice(index_to_remove, 1);
-	game_data.handled_actions[id] = data
+	game_data.handled_actions[id] = data;
 }
 
 function stats_update(update_data) {
-	const { id, data} = update_data;
+	const { id, data } = update_data;
 
 	for (const [key, value] of Object.entries(data)) {
 		if (key.startsWith('stat')) {
@@ -90,50 +84,36 @@ function stats_update(update_data) {
 			game_data.stats_secondary[key] = value;
 		}
 	}
-	game_data.handled_actions[id] = data
+	game_data.handled_actions[id] = data;
 }
 
 function image_upload(update_data) {
-	const { id, data} = update_data;
+	const { id, data } = update_data;
+	const { item_id, base64_chunk, base64_chunk_index, base64_chunk_count } = data;
 
-	// Check if the image upload has started
-	if(!Object.hasOwn(temp_image_base64, data.item_id)){
-		return
+	// Initialize Map for temp image data
+	if (!temp_image_base64.has(item_id)) {
+		temp_image_base64.set(item_id, new Map());
 	}
 
-	temp_image_base64[data.item_id].push(data.base64_chunks);
-	game_data.handled_actions[id] = data
-}
+	// Add the image chunk to the temp image data
+	temp_image_base64.get(item_id).set(base64_chunk_index, base64_chunk);
 
-function image_upload_start(update_data) {
-	const { id, data} = update_data;
+	// Check if image is complete
+	if (temp_image_base64.get(item_id).size === base64_chunk_count) {
+		// Order the chunks based on the index
+		const sorted_image_array = Array.from(temp_image_base64.get(item_id).entries()).sort(
+			(a, b) => a[0] - b[0]
+		);
 
-	temp_image_base64[data.item_id] = []
-	temp_image_base64[data.item_id].push(data.base64_chunks);
-	game_data.handled_actions[id] = data
-}
+		// Extract values from the sorted array
+		const sorted_values = sorted_image_array.map((entry) => entry[1]);
 
-function image_upload_end(update_data) {
-	const { id, data} = update_data;
-
-	const { item_id, base64_chunks } = data;
-
-	// Check if the image upload has started
-	if(!Object.hasOwn(temp_image_base64, item_id)){
-		return
+		// Store the final base64
+		game_data.stored_images[item_id] = sorted_values.join('');
 	}
 
-	// Add the last image chunk
-	temp_image_base64[item_id].push(base64_chunks);
-
-	// Store the full base64 string in game_data
-	game_data.stored_images[item_id] = temp_image_base64[item_id].join('');
-
-	// Clear the temp image entry
-	delete temp_image_base64[item_id]
-
-	game_data.handled_actions[id] = data
-	console.log(game_data);
+	game_data.handled_actions[id] = data;
 }
 
 function clear_all() {
