@@ -52,7 +52,7 @@
 	}
 
 	.btn_down {
-		padding: 2rem 0.5rem 0.3rem 2rem;
+		padding: 3rem 0.5rem 0.3rem 2rem;
 	}
 
 	.btn_left_top {
@@ -66,7 +66,7 @@
 
 	.btn_folded_down {
 		margin-bottom: -0.5rem;
-		padding: 0.5rem 2rem 1.5rem 2rem;
+		padding: 3.5rem 2rem 1.5rem 2rem;
 	}
 
 	.btn_folded_left_top {
@@ -80,5 +80,9 @@
 
 	.icon_folded_right {
 		margin-left: -1rem;
+	}
+
+	.icon_folded_down {
+		margin-top: -3rem;
 	}
 </style>
