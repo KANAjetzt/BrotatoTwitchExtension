@@ -85,7 +85,7 @@
 
 	.container_stats {
 		grid-column: 3 / 4;
-		grid-row: 1 / -1;
+		grid-row: 1 / 5;
 	}
 
 	.container_items {

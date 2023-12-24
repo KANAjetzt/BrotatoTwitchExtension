@@ -8,7 +8,7 @@
 	import InfoStat from '../Info_Stat/Info_Stat.svelte';
 
 	$: data_stats_primary = stats_primary_sorting($game_data?.stats_primary);
-	$: data_stats_secondary = $game_data?.stats_secondary;
+	$: data_stats_secondary = stats_secondary_sorting($game_data?.stats_secondary);
 	let data_translations;
 	let current_stat_view = 'primary';
 
@@ -38,6 +38,35 @@
 			stat_speed: stats_data.stat_speed,
 			stat_luck: stats_data.stat_luck,
 			stat_harvesting: stats_data.stat_harvesting
+		};
+	}
+
+	function stats_secondary_sorting(stats_data) {
+		if (!stats_data || Object.keys(stats_data).length === 0) {
+			return;
+		}
+
+		return {
+			consumable_heal: [stats_data.consumable_heal, true],
+			heal_when_pickup_gold: [stats_data.heal_when_pickup_gold, true],
+			xp_gain: [stats_data.xp_gain, true],
+			pickup_range: [stats_data.pickup_range, true],
+			items_price: [stats_data.items_price, false],
+			explosion_damage: [stats_data.explosion_damage, true],
+			explosion_size: [stats_data.explosion_size, true],
+			bounce: [stats_data.bounce, true],
+			piercing: [stats_data.piercing, true],
+			piercing_damage: [stats_data.piercing_damage, true],
+			damage_against_bosses: [stats_data.damage_against_bosses, true],
+			burning_cooldown_reduction: [stats_data.burning_cooldown_reduction, true],
+			burning_spread: [stats_data.burning_spread, true],
+			knockback: [stats_data.knockback, true],
+			chance_double_gold: [stats_data.chance_double_gold, true],
+			item_box_gold: [stats_data.item_box_gold, true],
+			free_rerolls: [stats_data.free_rerolls, true],
+			trees: [stats_data.trees, true],
+			number_of_enemies: [stats_data.number_of_enemies, false],
+			enemy_speed: [stats_data.enemy_speed, false]
 		};
 	}
 
@@ -85,10 +114,11 @@
 					class="info_stats_secondary"
 					transition:fly|local={{ x: 400, duration: 200, easing: quintOut }}
 				>
-					{#each Object.keys(data_stats_secondary) as stat_secondary}
+					{#each Object.keys(data_stats_secondary) as stat_secondary_key}
 						<InfoStat
-							stat_text={get_translated_string(data_translations, stat_secondary, 'en')}
-							stat_value={data_stats_secondary[stat_secondary]}
+							stat_text={get_translated_string(data_translations, stat_secondary_key, 'en')}
+							stat_value={data_stats_secondary[stat_secondary_key][0]}
+							is_positive={data_stats_secondary[stat_secondary_key][1]}
 						/>
 					{/each}
 				</div>
@@ -127,6 +157,10 @@
 
 	.info_stats_primary {
 		row-gap: 0.3rem;
+	}
+
+	.info_stats_secondary {
+		row-gap: 0.45rem;
 	}
 
 	.info_stats_primary,

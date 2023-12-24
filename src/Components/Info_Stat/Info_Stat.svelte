@@ -3,8 +3,17 @@
 	export let img_alt = '';
 	export let stat_text = '';
 	export let stat_value = '';
+	export let is_positive = undefined;
 
 	function get_text_color(value) {
+		if (is_positive === true && value !== 0) {
+			return 'green';
+		}
+
+		if (is_positive === false && value !== 0) {
+			return 'red';
+		}
+
 		if (value > 0) {
 			return 'green';
 		}
@@ -17,7 +26,7 @@
 </script>
 
 {#if stat_text}
-	<div class="info_stat {img_src ? "columns_three" : "columns_two"}">
+	<div class="info_stat {img_src ? 'columns_three' : 'columns_two'}">
 		{#if img_src}
 			<img src={img_src} alt={img_alt} />
 		{/if}
@@ -37,7 +46,7 @@
 		grid-template-columns: min-content 1fr 1fr;
 	}
 	.columns_two {
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr max-content;
 	}
 
 	.green {
