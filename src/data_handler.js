@@ -13,9 +13,26 @@ export function data_handler(data) {
 	data.forEach((update_data) => {
 		const { id, action } = update_data;
 
-		// Skip if the action has been handled in the past
 		if (id !== '' && Object.hasOwn(game_data.handled_actions, id)) {
-			return;
+			const { data } = update_data;
+			const { id, effects, stats } = data;
+
+			// Handle item effect text update
+			if (action == 'item_added') {
+				game_data.items[id].effects = effects;
+			}
+			// Handle weapon effect and stat text update
+			if (action == 'weapon_added') {
+				const weapons_with_id = game_data.weapons.filter((weapon_data) => weapon_data.id == id);
+
+				weapons_with_id.forEach((weapon) => {
+					weapon.stats = stats;
+					weapon.effects = effects;
+				});
+			}
+
+			// Skip the rest if the action has been handled in the past
+			return game_data;
 		}
 
 		switch (action) {
