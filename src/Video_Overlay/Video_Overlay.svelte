@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { app_store, game_data, game_data_counted_items, game_translations } from './../stores.js';
+	import { app_store, game_data, game_translations } from './../stores.js';
 	import { data_handler } from './../data_handler.js';
 	import Container_Stats from './../Components/Container_Stats/Container_Stats.svelte';
 	import Container_Items from './../Components/Container_Items/Container_Items.svelte';
@@ -21,7 +21,7 @@
 
 		window.Twitch.ext.listen('broadcast', async (target, contentType, message) => {
 			console.log('listening');
-			console.log(message);
+			console.log(JSON.parse(message));
 
 			const data = JSON.parse(message);
 
@@ -51,7 +51,7 @@
 			</div>
 			<div class="container_items">
 				<Container_Items
-					data_items={$game_data_counted_items.items}
+					data_items={$game_data.items}
 					{data_translations}
 					fold_direction={'down'}
 					heading={'Items'}

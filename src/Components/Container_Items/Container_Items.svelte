@@ -42,7 +42,7 @@
 		<h2>{heading}</h2>
 		<div class={`items styled_scrollbar row_${rows}`}>
 			{#if data_items}
-				{#each data_items as item}
+				{#each Object.values(data_items) as item}
 					<Info_Item
 						name={item.name}
 						id={item.id}

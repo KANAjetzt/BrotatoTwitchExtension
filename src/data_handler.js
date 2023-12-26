@@ -3,7 +3,7 @@ let temp_image_base64 = new Map();
 let game_data = {
 	stats_primary: {},
 	stats_secondary: {},
-	items: [],
+	items: {},
 	weapons: [],
 	stored_images: {},
 	handled_actions: {}
@@ -49,7 +49,13 @@ export function data_handler(data) {
 function item_add(update_data) {
 	const { id, data } = update_data;
 
-	game_data?.items.push(data);
+	const existing_item_data = game_data.items[data.id];
+
+	// Check if item already exists and current item count is smaller then new count or there is no item data yet.
+	if ((existing_item_data && existing_item_data.count < data.count) || !existing_item_data) {
+		game_data.items[data.id] = data;
+	}
+
 	game_data.handled_actions[id] = data;
 }
 
@@ -120,7 +126,7 @@ function clear_all() {
 	game_data = {
 		stats_primary: {},
 		stats_secondary: {},
-		items: [],
+		items: {},
 		weapons: [],
 		stored_images: {},
 		handled_actions: {}
