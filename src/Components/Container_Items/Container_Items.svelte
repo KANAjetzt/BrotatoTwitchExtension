@@ -17,10 +17,10 @@
 	export let is_show_settings = false;
 	export let use_keyed_each = false;
 
-	let el;
+	let container_wrapper;
 
 	const heightSpring = spring(0, { stiffness: 0.1, damping: 0.3 });
-	$: heightStore = syncHeight(el);
+	$: heightStore = syncHeight(container_wrapper);
 	$: heightSpring.set(open ? $heightStore || 0 : 0);
 
 	function handle_img_src(item_id) {
@@ -67,27 +67,42 @@
 		}
 	});
 
-	function syncHeight(el) {
+	// https://svelte.dev/repl/5bc2b443f4194c3786942aabb828fdbf?version=3.30.0
+	function syncHeight(element) {
 		return writable(null, (set) => {
-			if (!el) {
+			if (!element) {
 				return;
 			}
-			let ro = new ResizeObserver(() => el && set(el.offsetHeight));
-			ro.observe(el);
-			return () => ro.disconnect();
+			let resize_observer = new ResizeObserver(() => element && set(element.offsetHeight));
+			resize_observer.observe(element);
+			return () => resize_observer.disconnect();
 		});
 	}
 </script>
 
 <div class="items_container" style="height: {$heightSpring}px;">
-	<div bind:this={el}>
-	<Container {fold_direction} {is_show_settings}>
-		<h2>{heading}</h2>
-		<div class={`items styled_scrollbar row_${rows}`}>
-			{#if data_items}
-				{#if use_keyed_each}
-					{#each data_items as item (item.id)}
-						<div in:receive={{ key: item.id }} out:send={{ key: item.id }} animate:flip>
+	<div bind:this={container_wrapper}>
+		<Container {fold_direction} {is_show_settings}>
+			<h2>{heading}</h2>
+			<div class={`items styled_scrollbar row_${rows}`}>
+				{#if data_items}
+					{#if use_keyed_each}
+						{#each data_items as item (item.id)}
+							<div in:receive={{ key: item.id }} out:send={{ key: item.id }} animate:flip>
+								<Info_Item
+									name={item.name}
+									id={item.id}
+									set={item.set ? item.set : ''}
+									img_src={handle_img_src(item.id)}
+									tier={item.tier}
+									effect_text={item.effects}
+									stat_text={item.stats}
+									count={item.count}
+								/>
+							</div>
+						{/each}
+					{:else}
+						{#each data_items as item}
 							<Info_Item
 								name={item.name}
 								id={item.id}
@@ -98,25 +113,11 @@
 								stat_text={item.stats}
 								count={item.count}
 							/>
-						</div>
-					{/each}
-				{:else}
-					{#each data_items as item}
-						<Info_Item
-							name={item.name}
-							id={item.id}
-							set={item.set ? item.set : ''}
-							img_src={handle_img_src(item.id)}
-							tier={item.tier}
-							effect_text={item.effects}
-							stat_text={item.stats}
-							count={item.count}
-						/>
-					{/each}
+						{/each}
+					{/if}
 				{/if}
-			{/if}
-		</div>
-	</Container>
+			</div>
+		</Container>
 	</div>
 </div>
 
