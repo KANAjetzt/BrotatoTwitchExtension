@@ -1,3 +1,6 @@
+import { local_storage_save, local_storage_get } from './utils';
+
+let is_images_loaded_from_local_storage = false;
 let temp_image_base64 = new Map();
 
 let game_data = {
@@ -10,6 +13,12 @@ let game_data = {
 };
 
 export function data_handler(data) {
+	// Load images from local storage
+	if (!is_images_loaded_from_local_storage) {
+		game_data.stored_images = local_storage_get('images');
+		is_images_loaded_from_local_storage = true;
+	}
+
 	data.forEach((update_data) => {
 		const { id, action } = update_data;
 
@@ -114,6 +123,11 @@ function image_upload(update_data) {
 	const { id, data } = update_data;
 	const { item_id, base64_chunk, base64_chunk_index, base64_chunk_count } = data;
 
+	// Check if the image is already saved
+	if (Object.hasOwn(game_data.stored_images, item_id)) {
+		return;
+	}
+
 	// Initialize Map for temp image data
 	if (!temp_image_base64.has(item_id)) {
 		temp_image_base64.set(item_id, new Map());
@@ -134,6 +148,9 @@ function image_upload(update_data) {
 
 		// Store the final base64
 		game_data.stored_images[item_id] = sorted_values.join('');
+
+		// Update local storage
+		local_storage_save(game_data.stored_images, 'images');
 	}
 
 	game_data.handled_actions[id] = data;

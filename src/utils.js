@@ -39,3 +39,18 @@ export function get_icon_path(item_id) {
 		return `character_icons/${item_id.replace('character_', '')}_icon.png`;
 	}
 }
+
+// --- Local Storage Utils ---
+
+export const local_storage_save = (data, key) => {
+	const dataString = JSON.stringify(data);
+	localStorage.setItem(key, dataString);
+};
+
+export const local_storage_get = (key) => {
+	return JSON.parse(localStorage.getItem(key));
+};
+
+export const local_storage_delete = (key) => {
+	localStorage.removeItem(key);
+};
