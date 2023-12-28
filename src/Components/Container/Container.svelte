@@ -2,11 +2,15 @@
 	import { fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import BtnFold from '../Btn_Fold/Btn_Fold.svelte';
+	import Icon_Settings from '../icons/Settings.svelte';
+	import Container_Items_Settings from '../Container_Items_Settings/Container_Items_Settings.svelte';
 
 	export let fold_direction;
+	export let is_show_settings = false;
 
 	let is_folded = false;
 	let show_is_folded_btn = false;
+	let is_settings_open = false;
 
 	function get_transition_values() {
 		switch (fold_direction) {
@@ -29,8 +33,22 @@
 <div
 	class="container {is_folded ? `${fold_direction}_animate_out` : `${fold_direction}_animate_in`}"
 >
+	{#if is_show_settings}
+		<button
+			class="icon_settings"
+			on:click={() => {
+				is_settings_open = !is_settings_open;
+			}}
+		>
+			<Icon_Settings width={21} height={21} fill={'#eee'} fill_opacity={0.8} />
+		</button>
+	{/if}
+
 	<slot />
 </div>
+{#if is_settings_open}
+	<Container_Items_Settings />
+{/if}
 <div
 	class="btn_fold {fold_direction} {is_folded
 		? `${fold_direction}_animate_out`
@@ -71,6 +89,8 @@
 
 <style>
 	.container {
+		display: flex;
+		flex-direction: column;
 		position: relative;
 		padding: 2rem;
 		background-color: var(--container-bg-color);
@@ -127,5 +147,12 @@
 	.left_top {
 		left: 0px;
 		top: -2rem;
+	}
+
+	.icon_settings {
+		background-color: transparent;
+		border: none;
+		align-self: flex-end;
+		cursor: pointer;
 	}
 </style>

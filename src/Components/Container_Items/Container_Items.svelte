@@ -1,14 +1,27 @@
 <script>
+	import { spring } from 'svelte/motion';
+	import { writable } from 'svelte/store';
+	import { flip } from 'svelte/animate';
+	import { crossfade } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
+	import { game_data } from '../../stores.js';
 	import { get_translated_string, get_icon_path } from '../../utils.js';
 	import Info_Item from './../Info_Item/Info_Item.svelte';
 	import Container from '../Container/Container.svelte';
-	import { game_data } from '../../stores.js';
 
 	export let heading;
 	export let fold_direction;
 	export let data_items;
 	export let data_translations;
 	export let rows = 1;
+	export let is_show_settings = false;
+	export let use_keyed_each = false;
+
+	let el;
+
+	const heightSpring = spring(0, { stiffness: 0.1, damping: 0.3 });
+	$: heightStore = syncHeight(el);
+	$: heightSpring.set(open ? $heightStore || 0 : 0);
 
 	function handle_img_src(item_id) {
 		// item_ids
@@ -35,28 +48,76 @@
 
 		return get_icon_path(item_id);
 	}
+
+	const [send, receive] = crossfade({
+		duration: (d) => Math.sqrt(d * 100),
+
+		fallback(node, params) {
+			const style = getComputedStyle(node);
+			const transform = style.transform === 'none' ? '' : style.transform;
+
+			return {
+				duration: 100,
+				easing: quintOut,
+				css: (t) => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+				`
+			};
+		}
+	});
+
+	function syncHeight(el) {
+		return writable(null, (set) => {
+			if (!el) {
+				return;
+			}
+			let ro = new ResizeObserver(() => el && set(el.offsetHeight));
+			ro.observe(el);
+			return () => ro.disconnect();
+		});
+	}
 </script>
 
-<div class="items_container">
-	<Container {fold_direction}>
+<div class="items_container" style="height: {$heightSpring}px;">
+	<div bind:this={el}>
+	<Container {fold_direction} {is_show_settings}>
 		<h2>{heading}</h2>
 		<div class={`items styled_scrollbar row_${rows}`}>
 			{#if data_items}
-				{#each Object.values(data_items) as item}
-					<Info_Item
-						name={item.name}
-						id={item.id}
-						set={item.set ? item.set : ''}
-						img_src={handle_img_src(item.id)}
-						tier={item.tier}
-						effect_text={item.effects}
-						stat_text={item.stats}
-						count={item.count}
-					/>
-				{/each}
+				{#if use_keyed_each}
+					{#each data_items as item (item.id)}
+						<div in:receive={{ key: item.id }} out:send={{ key: item.id }} animate:flip>
+							<Info_Item
+								name={item.name}
+								id={item.id}
+								set={item.set ? item.set : ''}
+								img_src={handle_img_src(item.id)}
+								tier={item.tier}
+								effect_text={item.effects}
+								stat_text={item.stats}
+								count={item.count}
+							/>
+						</div>
+					{/each}
+				{:else}
+					{#each data_items as item}
+						<Info_Item
+							name={item.name}
+							id={item.id}
+							set={item.set ? item.set : ''}
+							img_src={handle_img_src(item.id)}
+							tier={item.tier}
+							effect_text={item.effects}
+							stat_text={item.stats}
+							count={item.count}
+						/>
+					{/each}
+				{/if}
 			{/if}
 		</div>
 	</Container>
+	</div>
 </div>
 
 <style>
@@ -82,5 +143,9 @@
 
 	.row_2 {
 		max-height: calc(6.5rem * 2);
+	}
+
+	.row_3 {
+		max-height: calc(6.5rem * 3);
 	}
 </style>

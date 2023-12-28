@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { app_store, game_data, game_translations } from './../stores.js';
+	import { app_store, game_data, items_sorted, game_translations } from './../stores.js';
 	import { data_handler } from './../data_handler.js';
 	import Container_Stats from './../Components/Container_Stats/Container_Stats.svelte';
 	import Container_Items from './../Components/Container_Items/Container_Items.svelte';
@@ -10,26 +10,19 @@
 	let promise = Promise.all([$game_translations]);
 
 	onMount(async () => {
-		console.log('mounting');
 
 		const data = await game_translations.get();
 		data_translations = data;
 
 		window.Twitch.ext.onAuthorized((auth) => {
-			console.log('The channel ID is', auth.channelId);
 		});
 
 		window.Twitch.ext.listen('broadcast', async (target, contentType, message) => {
-			console.log('listening');
-			console.log(JSON.parse(message));
-
 			const data = JSON.parse(message);
 
 			let new_game_data = data_handler(data);
 
 			$game_data = new_game_data;
-
-			console.log($game_data);
 		});
 	});
 
@@ -51,10 +44,13 @@
 			</div>
 			<div class="container_items">
 				<Container_Items
-					data_items={$game_data.items}
+					data_items={$items_sorted}
 					{data_translations}
 					fold_direction={'down'}
 					heading={'Items'}
+					rows={$app_store.item_container_rows}
+					is_show_settings={true}
+					use_keyed_each={true}
 				/>
 			</div>
 			<div class="container_weapons">
