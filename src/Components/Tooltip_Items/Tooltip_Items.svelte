@@ -52,11 +52,15 @@
 	});
 
 	function position_tooltip() {
-		tooltip.style.setProperty('--position-x', `${$app_store.tooltip_data.position.x}px`);
-		tooltip.style.setProperty(
-			'--position-y',
-			`${$app_store.tooltip_data.position.y - tooltip.clientHeight}px`
-		);
+		// Use `setTimeout` because without the `tooltip.clientHeight`, it might be from mid-transition,
+		// causing the tooltip to be in a wrong position if the animation of the tooltip is interrupted.
+		setTimeout(() => {
+			tooltip.style.setProperty('--position-x', `${$app_store.tooltip_data.position.x}px`);
+			tooltip.style.setProperty(
+				'--position-y',
+				`${$app_store.tooltip_data.position.y - tooltip.clientHeight}px`
+			);
+		}, 0);
 	}
 
 	function handle_bb_code(text) {
