@@ -48,7 +48,7 @@
 
 		return {
 			consumable_heal: [stats_data.consumable_heal, true],
-			heal_when_pickup_gold: [stats_data.heal_when_pickup_gold, true],
+			chance_heal_on_gold: [stats_data.heal_when_pickup_gold, true],
 			xp_gain: [stats_data.xp_gain, true],
 			pickup_range: [stats_data.pickup_range, true],
 			items_price: [stats_data.items_price, false],
