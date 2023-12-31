@@ -13,7 +13,7 @@ export const app_store = writable({
 		position: {},
 		index: -1
 	},
-	item_container_rows: 1,
+	item_container_rows: '1',
 	item_container_sorting: 'received'
 });
 
