@@ -6,12 +6,16 @@
 	export let is_positive = undefined;
 
 	function get_text_color(value) {
-		if (is_positive === true && value !== 0) {
+		if (is_positive === true && value > 0) {
 			return 'green';
+		} else if (is_positive === true && value > 0) {
+			return 'red';
 		}
 
-		if (is_positive === false && value !== 0) {
+		if (is_positive === false && value > 0) {
 			return 'red';
+		} else if (is_positive === false && value < 0) {
+			return 'green';
 		}
 
 		if (value > 0) {
