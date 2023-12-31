@@ -9,6 +9,7 @@
 
 	let tooltip;
 	let previous_item_name = '';
+	let previous_item_index = -1;
 
 	$: html_effect_text = handle_bb_code($app_store.tooltip_data.effect_text);
 	$: html_stat_text = handle_bb_code($app_store.tooltip_data.stat_text);
@@ -41,7 +42,7 @@
 		if (!tooltip) {
 			return;
 		}
-		if (previous_item_name === '' || previous_item_name !== new_value.tooltip_data.name) {
+		if (previous_item_index !== new_value.tooltip_data.index) {
 			previous_item_name = new_value.tooltip_data.name;
 			html_effect_text = handle_bb_code($app_store.tooltip_data.effect_text);
 			html_stat_text = handle_bb_code($app_store.tooltip_data.stat_text);

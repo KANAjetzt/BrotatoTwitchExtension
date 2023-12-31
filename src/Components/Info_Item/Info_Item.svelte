@@ -10,6 +10,7 @@
 	export let effect_text = '';
 	export let stat_text = '';
 	export let count = 1;
+	export let index = -1;
 </script>
 
 <div
@@ -30,7 +31,8 @@
 				set,
 				effect_text,
 				stat_text,
-				position: target_position
+				position: target_position,
+				index
 			};
 		}
 	}}

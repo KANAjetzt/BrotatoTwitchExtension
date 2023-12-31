@@ -10,7 +10,8 @@ export const app_store = writable({
 		set: '',
 		effect_text: '',
 		stat_text: '',
-		position: {}
+		position: {},
+		index: -1
 	},
 	item_container_rows: 1,
 	item_container_sorting: 'received'

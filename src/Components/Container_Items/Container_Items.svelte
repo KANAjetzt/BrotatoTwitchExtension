@@ -87,7 +87,7 @@
 			<div class={`items styled_scrollbar row_${rows}`}>
 				{#if data_items}
 					{#if use_keyed_each}
-						{#each data_items as item (item.id)}
+						{#each data_items as item, index (item.id)}
 							<div in:receive={{ key: item.id }} out:send={{ key: item.id }} animate:flip>
 								<Info_Item
 									name={item.name}
@@ -98,11 +98,12 @@
 									effect_text={item.effects}
 									stat_text={item.stats}
 									count={item.count}
+									{index}
 								/>
 							</div>
 						{/each}
 					{:else}
-						{#each data_items as item}
+						{#each data_items as item, index}
 							<Info_Item
 								name={item.name}
 								id={item.id}
@@ -112,6 +113,7 @@
 								effect_text={item.effects}
 								stat_text={item.stats}
 								count={item.count}
+								{index}
 							/>
 						{/each}
 					{/if}
