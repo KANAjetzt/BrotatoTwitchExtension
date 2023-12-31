@@ -15,7 +15,10 @@ let game_data = {
 export function data_handler(data) {
 	// Load images from local storage
 	if (!is_images_loaded_from_local_storage) {
-		game_data.stored_images = local_storage_get('images');
+		const local_storage_image_data = local_storage_get('images');
+		if (local_storage_image_data) {
+			game_data.stored_images = local_storage_get('images');
+		}
 		is_images_loaded_from_local_storage = true;
 	}
 
@@ -150,7 +153,14 @@ function image_upload(update_data) {
 		game_data.stored_images[item_id] = sorted_values.join('');
 
 		// Update local storage
-		local_storage_save(game_data.stored_images, 'images');
+		const image_data_local_storage = local_storage_get('images');
+		let image_data_to_save = game_data.stored_images;
+
+		if (image_data_local_storage) {
+			image_data_to_save = { ...image_data_local_storage, ...game_data.stored_images };
+		}
+
+		local_storage_save(image_data_to_save, 'images');
 	}
 
 	game_data.handled_actions[id] = data;

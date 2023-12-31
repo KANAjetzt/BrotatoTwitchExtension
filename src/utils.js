@@ -48,7 +48,13 @@ export const local_storage_save = (data, key) => {
 };
 
 export const local_storage_get = (key) => {
-	return JSON.parse(localStorage.getItem(key));
+	const local_storage_item = localStorage.getItem(key);
+
+	if (local_storage_item) {
+		return JSON.parse(localStorage.getItem(key));
+	} else {
+		return null;
+	}
 };
 
 export const local_storage_delete = (key) => {
