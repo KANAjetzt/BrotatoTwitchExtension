@@ -175,4 +175,6 @@ function clear_all() {
 		stored_images: {},
 		handled_actions: {}
 	};
+
+	is_images_loaded_from_local_storage = false;
 }
