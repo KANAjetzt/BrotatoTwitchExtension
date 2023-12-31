@@ -23,17 +23,13 @@
 	$: heightStore = syncHeight(container_wrapper);
 	$: heightSpring.set(open ? $heightStore || 0 : 0);
 
-	function handle_img_src(item_id) {
+	function handle_img_src(item) {
 		// item_ids
 		// weapon_hammer_3 | weapon_lightning_shiv_1 | item_bag | item_tree | kana_mysterious_medal | character_treasure_hunter
-		let item_id_current = '';
+		let item_id_current = item.id;
 
-		if (item_id.startsWith('weapon')) {
-			const weapon_id_split = item_id.split('_');
-			weapon_id_split.splice(weapon_id_split.length - 1, 1);
-			item_id_current = weapon_id_split.join('_');
-		} else {
-			item_id_current = item_id;
+		if (item_id_current.startsWith('weapon')) {
+			item_id_current = item.weapon_id;
 		}
 
 		const translation_string = get_translated_string(data_translations, item_id_current, 'en');
@@ -46,7 +42,7 @@
 			return '';
 		}
 
-		return get_icon_path(item_id);
+		return get_icon_path(item_id_current);
 	}
 
 	const [send, receive] = crossfade({
@@ -93,7 +89,7 @@
 									name={item.name}
 									id={item.id}
 									set={item.set ? item.set : ''}
-									img_src={handle_img_src(item.id)}
+									img_src={handle_img_src(item)}
 									tier={item.tier}
 									effect_text={item.effects}
 									stat_text={item.stats}
@@ -108,7 +104,7 @@
 								name={item.name}
 								id={item.id}
 								set={item.set ? item.set : ''}
-								img_src={handle_img_src(item.id)}
+								img_src={handle_img_src(item)}
 								tier={item.tier}
 								effect_text={item.effects}
 								stat_text={item.stats}
