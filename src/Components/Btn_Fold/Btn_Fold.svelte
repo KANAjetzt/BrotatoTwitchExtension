@@ -52,7 +52,7 @@
 	}
 
 	.btn_down {
-		padding: 3rem 0.5rem 0.3rem 2rem;
+		padding: 0.8rem 0.5rem 3rem 2rem;
 	}
 
 	.btn_left_top {
