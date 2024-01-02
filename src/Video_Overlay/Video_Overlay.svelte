@@ -10,12 +10,8 @@
 	let promise = Promise.all([$game_translations]);
 
 	onMount(async () => {
-
 		const data = await game_translations.get();
 		data_translations = data;
-
-		window.Twitch.ext.onAuthorized((auth) => {
-		});
 
 		window.Twitch.ext.listen('broadcast', async (target, contentType, message) => {
 			const data = JSON.parse(message);
@@ -96,5 +92,12 @@
 		align-self: end;
 		z-index: 2;
 		width: 25rem;
+	}
+
+	@media only screen and (width <= 1460px) {
+		.container_stats {
+			align-self: end;
+			margin-bottom: 4rem;
+		}
 	}
 </style>

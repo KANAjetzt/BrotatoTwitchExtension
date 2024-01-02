@@ -97,7 +97,7 @@
 
 			{#if data_stats_primary && current_stat_view === 'primary'}
 				<div
-					class="info_stats_primary"
+					class="info_stats_primary styled_scrollbar"
 					transition:fly|local={{ x: 400, duration: 200, easing: quintOut }}
 				>
 					{#each Object.keys(data_stats_primary) as stat_primary}
@@ -111,7 +111,7 @@
 			{/if}
 			{#if data_stats_secondary && current_stat_view === 'secondary'}
 				<div
-					class="info_stats_secondary"
+					class="info_stats_secondary styled_scrollbar"
 					transition:fly|local={{ x: 400, duration: 200, easing: quintOut }}
 				>
 					{#each Object.keys(data_stats_secondary) as stat_secondary_key}
@@ -136,11 +136,10 @@
 
 	.stats {
 		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: max-content max-content 1fr;
+		/* fixed width ein height to prevent layout shift on panel change */
+		grid-template-columns: 22rem;
+		grid-template-rows: max-content max-content 34rem;
 		align-items: center;
-		width: 22rem;
-		height: 38rem;
 	}
 
 	h2 {
@@ -161,13 +160,32 @@
 
 	.info_stats_secondary {
 		row-gap: 0.45rem;
+		overflow-y: auto;
 	}
 
 	.info_stats_primary,
 	.info_stats_secondary {
 		width: 100%;
+		height: 100%;
 		display: grid;
 		grid-column: 1 / 2;
 		grid-row: 3 / 4;
+		padding-right: 0.5rem;
+	}
+
+	@media only screen and (width <= 1385px) {
+		.stats {
+			grid-template-rows: max-content max-content 28rem;
+		}
+	}
+
+	@media only screen and (width <= 1200px) {
+		.stats {
+			grid-template-rows: max-content max-content 24rem;
+		}
+
+		.info_stats_primary {
+			overflow-y: auto;
+		}
 	}
 </style>
