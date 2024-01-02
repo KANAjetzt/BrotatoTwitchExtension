@@ -56,6 +56,9 @@
 		// Use `setTimeout` because without the `tooltip.clientHeight`, it might be from mid-transition,
 		// causing the tooltip to be in a wrong position if the animation of the tooltip is interrupted.
 		setTimeout(() => {
+			if (!tooltip) {
+				return;
+			}
 			tooltip.style.setProperty('--position-x', `${$app_store.tooltip_data.position.x}px`);
 			tooltip.style.setProperty(
 				'--position-y',
