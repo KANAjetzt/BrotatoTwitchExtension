@@ -65,7 +65,7 @@
 			item_box_gold: [stats_data.item_box_gold, true],
 			free_rerolls: [stats_data.free_rerolls, true],
 			trees: [stats_data.trees, true],
-			number_of_enemies: [stats_data.number_of_enemies, false],
+			number_of_enemies: [stats_data.number_of_enemies, true],
 			enemy_speed: [stats_data.enemy_speed, false]
 		};
 	}
