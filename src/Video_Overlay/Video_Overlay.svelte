@@ -55,7 +55,17 @@
 					{data_translations}
 					fold_direction={'left_top'}
 					heading={'Weapons'}
-					rows={2}
+					rows={$app_store.weapon_container_rows}
+					is_show_settings={true}
+					settings_binds={{
+						rows: "weapon_container_rows"
+					}}
+					settings_options={{
+						clear_cache: false,
+						sort: false,
+						rows: true,
+						rows_max: 2
+					}}
 				/>
 			</div>
 			{#if $app_store.show_tooltip}

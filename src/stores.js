@@ -14,7 +14,8 @@ export const app_store = writable({
 		index: -1
 	},
 	item_container_rows: '1',
-	item_container_sorting: 'received'
+	item_container_sorting: 'received',
+	weapon_container_rows: '2'
 });
 
 export const game_data = writable({

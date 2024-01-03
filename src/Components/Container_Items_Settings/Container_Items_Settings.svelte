@@ -4,6 +4,18 @@
 	import { quintOut } from 'svelte/easing';
 	import { app_store } from '../../stores.js';
 
+	export let binds = {
+		rows: 'item_container_rows',
+		sorting: 'item_container_sorting'
+	};
+
+	export let options = {
+		clear_cache: true,
+		sort: true,
+		rows: true,
+		rows_max: 3
+	};
+
 	function clear_local_storage() {
 		// Right now only the images are stored in local storage
 		local_storage_delete('images');
@@ -11,27 +23,34 @@
 </script>
 
 <div class="settings" transition:fly={{ duration: 300, y: 300, opacity: 0, easing: quintOut }}>
-	<div class="rows select">
-		<label for="row_count">Row Count</label>
-		<select name="row_count" id="row_count" bind:value={$app_store.item_container_rows}>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-		</select>
-	</div>
-	<div class="sort select">
-		<label for="sort_by">Sort by</label>
-		<select name="sort_by" id="sort_by" bind:value={$app_store.item_container_sorting}>
-			<option value="received">received</option>
-			<option value="tier">tier</option>
-			<option value="count">count</option>
-		</select>
-	</div>
-	<button
-		on:click={() => {
-			clear_local_storage();
-		}}>Clear Cache</button
-	>
+	{#if options.rows}
+		<div class="rows select">
+			<label for="row_count">Row Count</label>
+			<select name="row_count" id="row_count" bind:value={$app_store[binds.rows]}>
+				<!-- https://github.com/sveltejs/svelte/issues/2968 -->
+				{#each { length: options.rows_max } as _, i}
+					<option value={`${i + 1}`}>{i + 1}</option>
+				{/each}
+			</select>
+		</div>
+	{/if}
+	{#if options.sort}
+		<div class="sort select">
+			<label for="sort_by">Sort by</label>
+			<select name="sort_by" id="sort_by" bind:value={$app_store[binds.sorting]}>
+				<option value="received">received</option>
+				<option value="tier">tier</option>
+				<option value="count">count</option>
+			</select>
+		</div>
+	{/if}
+	{#if options.clear_cache}
+		<button
+			on:click={() => {
+				clear_local_storage();
+			}}>Clear Cache</button
+		>
+	{/if}
 </div>
 
 <style>

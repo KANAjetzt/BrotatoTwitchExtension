@@ -15,6 +15,8 @@
 	export let data_translations;
 	export let rows = 1;
 	export let is_show_settings = false;
+	export let settings_options = undefined;
+	export let settings_binds = undefined;
 	export let use_keyed_each = false;
 
 	let container_wrapper;
@@ -78,7 +80,7 @@
 
 <div class="items_container" style="height: {$heightSpring}px;">
 	<div bind:this={container_wrapper}>
-		<Container {fold_direction} {is_show_settings}>
+		<Container {fold_direction} {is_show_settings} {settings_binds} {settings_options}>
 			<h2>{heading}</h2>
 			<div class={`items styled_scrollbar row_${rows}`}>
 				{#if data_items}

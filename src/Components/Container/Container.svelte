@@ -7,6 +7,8 @@
 
 	export let fold_direction;
 	export let is_show_settings = false;
+	export let settings_options = undefined;
+	export let settings_binds = undefined;
 
 	let is_folded = false;
 	let show_is_folded_btn = false;
@@ -47,7 +49,7 @@
 	<slot />
 </div>
 {#if is_settings_open}
-	<Container_Items_Settings />
+	<Container_Items_Settings options={settings_options} binds={settings_binds} />
 {/if}
 <div
 	class="btn_fold {fold_direction} {is_folded
