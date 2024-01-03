@@ -48,7 +48,7 @@
 	}
 
 	.btn_right {
-		padding: 1rem 2rem 0.5rem 2rem;
+		padding: 1rem 4rem 0.5rem 0.3rem;
 	}
 
 	.btn_down {
