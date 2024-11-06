@@ -96,6 +96,7 @@
 									effect_text={item.effects}
 									stat_text={item.stats}
 									count={item.count}
+									is_cursed={item.is_cursed}
 									{index}
 								/>
 							</div>
@@ -111,6 +112,7 @@
 								effect_text={item.effects}
 								stat_text={item.stats}
 								count={item.count}
+								is_cursed={item.is_cursed}
 								{index}
 							/>
 						{/each}

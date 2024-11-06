@@ -9,6 +9,7 @@
 	export let tier = '';
 	export let effect_text = '';
 	export let stat_text = '';
+	export let is_cursed = false;
 	export let count = 1;
 	export let index = -1;
 </script>
@@ -43,7 +44,11 @@
 	}}
 	transition:fade={{ duration: 150 }}
 >
-	<img src={img_src !== '' ? img_src : './blob.png'} alt={name === '' ? id : name} />
+	{#if is_cursed}
+		<img class="curse" src="./curse.png" alt={name === '' ? id : name} />
+	{/if}
+	<img class="main" src={img_src !== '' ? img_src : './blob.png'} alt={name === '' ? id : name} />
+
 	{#if count > 1}
 		<p>x{count}</p>
 	{/if}
@@ -55,6 +60,11 @@
 		height: var(--item-img-size);
 		grid-row: 1 / 4;
 		grid-column: 1 / 4;
+	}
+
+	.curse {
+		transform: scale(1.15);
+		z-index: -1;
 	}
 
 	p {
@@ -69,6 +79,7 @@
 		justify-content: center;
 		padding: var(--item-padding);
 		border-radius: var(--border-radius-primary);
+		overflow: hidden;
 	}
 
 	.bg_0 {
