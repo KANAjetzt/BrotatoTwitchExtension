@@ -22,6 +22,7 @@
 			return;
 		}
 		return {
+			stat_curse: stats_data.stat_curse,
 			stat_max_hp: stats_data.stat_max_hp,
 			stat_hp_regeneration: stats_data.stat_hp_regeneration,
 			stat_lifesteal: stats_data.stat_lifesteal,
@@ -58,6 +59,8 @@
 			piercing: [stats_data.piercing, true],
 			piercing_damage: [stats_data.piercing_damage, true],
 			damage_against_bosses: [stats_data.damage_against_bosses, true],
+			structure_attack_speed: [stats_data.structure_attack_speed, true],
+			structure_range: [stats_data.structure_range, true],
 			burning_cooldown_reduction: [stats_data.burning_cooldown_reduction, true],
 			burning_spread: [stats_data.burning_spread, true],
 			knockback: [stats_data.knockback, true],
@@ -66,7 +69,8 @@
 			free_rerolls: [stats_data.free_rerolls, true],
 			trees: [stats_data.trees, true],
 			number_of_enemies: [stats_data.number_of_enemies, true],
-			enemy_speed: [stats_data.enemy_speed, false]
+			enemy_speed: [stats_data.enemy_speed, false],
+			reroll_price: [stats_data.reroll_price, false]
 		};
 	}
 

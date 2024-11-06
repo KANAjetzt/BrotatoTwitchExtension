@@ -34,8 +34,13 @@
 		{#if img_src}
 			<img src={img_src} alt={img_alt} />
 		{/if}
-		<p class={get_text_color(stat_value)}>{stat_text}</p>
-		<p class={get_text_color(stat_value)}>{stat_value}</p>
+		{#if stat_text == 'Curse'}
+			<p class="purple">{stat_text}</p>
+			<p class="purple">{stat_value}</p>
+		{:else}
+			<p class={get_text_color(stat_value)}>{stat_text}</p>
+			<p class={get_text_color(stat_value)}>{stat_value}</p>
+		{/if}
 	</div>
 {/if}
 
@@ -59,6 +64,10 @@
 
 	.red {
 		color: lightcoral;
+	}
+
+	.purple {
+		color: #ca61ff;
 	}
 
 	p:last-child {
