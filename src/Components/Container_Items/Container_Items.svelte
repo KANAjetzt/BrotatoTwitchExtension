@@ -34,6 +34,10 @@
 			item_id_current = item.weapon_id;
 		}
 
+		if (item_id_current.includes('cursed')) {
+			item_id_current = item_id_current.split('-')[0];
+		}
+
 		const translation_string = get_translated_string(data_translations, item_id_current, 'en');
 
 		if (translation_string === '') {

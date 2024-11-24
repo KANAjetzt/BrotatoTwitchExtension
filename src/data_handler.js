@@ -23,15 +23,19 @@ export function data_handler(data) {
 	}
 
 	data.forEach((update_data) => {
-		const { id, action } = update_data;
+		const { id: uuid, action } = update_data;
 
-		if (id !== '' && Object.hasOwn(game_data.handled_actions, id)) {
+		if (uuid !== '' && Object.hasOwn(game_data.handled_actions, uuid)) {
 			const { data } = update_data;
-			const { id, effects, stats } = data;
+			let { id, effects, stats } = data;
 
 			// Handle item effect text update
 			if (action == 'item_added') {
-				game_data.items[id].effects = effects;
+				if (id.includes('cursed')) {
+					game_data.items[id].effects = effects;
+				} else {
+					game_data.items[id].effects = effects;
+				}
 			}
 			// Handle weapon effect and stat text update
 			if (action == 'weapon_added') {
@@ -50,6 +54,9 @@ export function data_handler(data) {
 		switch (action) {
 			case 'item_added':
 				item_add(update_data);
+				break;
+			case 'item_removed':
+				item_removed(update_data);
 				break;
 			case 'weapon_added':
 				weapon_added(update_data);
@@ -83,6 +90,22 @@ function item_add(update_data) {
 	// Check if item already exists and current item count is smaller then new count or there is no item data yet.
 	if ((existing_item_data && existing_item_data.count < data.count) || !existing_item_data) {
 		game_data.items[data.id] = data;
+	}
+
+	game_data.handled_actions[id] = data;
+}
+
+function item_removed(update_data) {
+	const { id, data } = update_data;
+
+	if (game_data.items[data.id]) {
+		if (game_data.items[data.id].count == 1) {
+			delete game_data.items[data.id];
+			console.log(`item ${data.id} deleted`);
+		} else {
+			game_data.items[data.id].count -= 1;
+			console.log(`item ${data.id} count - 1`);
+		}
 	}
 
 	game_data.handled_actions[id] = data;

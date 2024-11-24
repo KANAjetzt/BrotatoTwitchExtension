@@ -17,7 +17,7 @@ export function get_translated_string(translations, key, language_key) {
 export function get_icon_path(item_id) {
 	if (item_id.startsWith('item')) {
 		if (item_id.startsWith('item_eyes_surgery')) {
-			return `item_icons/eye_surgery.png`;
+			return `item_icons/eye_surgery_icon.png`;
 		}
 
 		const item_name = item_id.replace('item_', '');
