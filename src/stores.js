@@ -15,7 +15,12 @@ export const app_store = writable({
 	},
 	item_container_rows: '1',
 	item_container_sorting: 'received',
-	weapon_container_rows: '2'
+	weapon_container_rows: '2',
+	auto_fold: {
+		items: false,
+		weapons: false,
+		stats: false
+	}
 });
 
 export const game_data = writable({
@@ -24,7 +29,8 @@ export const game_data = writable({
 	items: {},
 	weapons: [],
 	stored_images: {},
-	handled_actions: {}
+	handled_actions: {},
+	in_wave: true
 });
 
 export const items_by_count = derived(game_data, ($game_data) => {

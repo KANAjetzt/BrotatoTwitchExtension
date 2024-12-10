@@ -1,6 +1,7 @@
 <script>
 	import { fly } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
+	import { app_store, game_data } from '../../stores';
 	import BtnFold from '../Btn_Fold/Btn_Fold.svelte';
 	import Icon_Settings from '../icons/Settings.svelte';
 	import Container_Items_Settings from '../Container_Items_Settings/Container_Items_Settings.svelte';
@@ -13,6 +14,8 @@
 	let is_folded = false;
 	let show_is_folded_btn = false;
 	let is_settings_open = false;
+
+	$: $game_data.in_wave, auto_fold();
 
 	function get_transition_values() {
 		switch (fold_direction) {
@@ -28,6 +31,29 @@
 
 			default:
 				break;
+		}
+	}
+
+	function auto_fold() {
+		if (!settings_binds) {
+			return;
+		}
+
+		const fold_setting = $app_store.auto_fold[settings_binds.auto_fold];
+
+		// If auto fold is disabled exit here
+		if (!fold_setting) {
+			return;
+		}
+
+		// If folded when wave starts unfold
+		if ($game_data.in_wave && is_folded) {
+			is_folded = false;
+		}
+
+		// if not folded at wave end fold
+		if (!$game_data.in_wave && !is_folded) {
+			is_folded = true;
 		}
 	}
 </script>

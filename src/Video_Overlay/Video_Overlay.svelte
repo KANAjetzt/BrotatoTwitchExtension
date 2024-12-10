@@ -36,7 +36,19 @@
 	{#if data_translations}
 		<div class="overlay">
 			<div class="container_stats">
-				<Container_Stats />
+				<Container_Stats
+					is_show_settings={true}
+					settings_options={{
+						clear_cache: false,
+						sort: false,
+						rows: false,
+						rows_max: 2,
+						auto_fold: true
+					}}
+					settings_binds={{
+						auto_fold: 'stats'
+					}}
+				/>
 			</div>
 			<div class="container_items">
 				<Container_Items
@@ -46,6 +58,11 @@
 					heading={'Items'}
 					rows={$app_store.item_container_rows}
 					is_show_settings={true}
+					settings_binds={{
+						rows: 'item_container_rows',
+						sorting: 'item_container_sorting',
+						auto_fold: 'items'
+					}}
 					use_keyed_each={true}
 				/>
 			</div>
@@ -58,13 +75,15 @@
 					rows={$app_store.weapon_container_rows}
 					is_show_settings={true}
 					settings_binds={{
-						rows: "weapon_container_rows"
+						rows: 'weapon_container_rows',
+						auto_fold: 'weapons'
 					}}
 					settings_options={{
 						clear_cache: false,
 						sort: false,
 						rows: true,
-						rows_max: 2
+						rows_max: 2,
+						auto_fold: true
 					}}
 				/>
 			</div>

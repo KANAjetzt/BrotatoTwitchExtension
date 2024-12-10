@@ -7,6 +7,10 @@
 	import Container from '../Container/Container.svelte';
 	import InfoStat from '../Info_Stat/Info_Stat.svelte';
 
+	export let is_show_settings = false;
+	export let settings_options = undefined;
+	export let settings_binds = undefined;
+
 	$: data_stats_primary = stats_primary_sorting($game_data?.stats_primary);
 	$: data_stats_secondary = stats_secondary_sorting($game_data?.stats_secondary);
 	let data_translations;
@@ -78,7 +82,7 @@
 </script>
 
 <div class="stats_container">
-	<Container fold_direction="right">
+	<Container fold_direction="right" {is_show_settings} {settings_binds} {settings_options}>
 		<div class="stats">
 			<h2>Stats</h2>
 

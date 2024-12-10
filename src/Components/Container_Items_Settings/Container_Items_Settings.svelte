@@ -6,14 +6,16 @@
 
 	export let binds = {
 		rows: 'item_container_rows',
-		sorting: 'item_container_sorting'
+		sorting: 'item_container_sorting',
+		auto_fold: ''
 	};
 
 	export let options = {
 		clear_cache: true,
 		sort: true,
 		rows: true,
-		rows_max: 3
+		rows_max: 3,
+		auto_fold: true
 	};
 
 	function clear_local_storage() {
@@ -42,6 +44,17 @@
 				<option value="tier">tier</option>
 				<option value="count">count</option>
 			</select>
+		</div>
+	{/if}
+	{#if options.auto_fold}
+		<div class="select auto_fold">
+			<label for="auto_fold">Auto fold</label>
+			<input
+				name="auto_fold"
+				id="auto_fold"
+				type="checkbox"
+				bind:checked={$app_store.auto_fold[binds.auto_fold]}
+			/>
 		</div>
 	{/if}
 	{#if options.clear_cache}
@@ -74,6 +87,11 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		align-items: center;
+		column-gap: 1rem;
+	}
+
+	.auto_fold input {
+		justify-self: start;
 	}
 
 	label {

@@ -9,7 +9,8 @@ let game_data = {
 	items: {},
 	weapons: [],
 	stored_images: {},
-	handled_actions: {}
+	handled_actions: {},
+	in_wave: false
 };
 
 export function data_handler(data) {
@@ -72,6 +73,12 @@ export function data_handler(data) {
 				break;
 			case 'clear_all':
 				clear_all();
+				break;
+			case 'wave_started':
+				wave_started();
+				break;
+			case 'wave_ended':
+				wave_ended();
 				break;
 			default:
 				console.log('I should not be here (⊙_⊙;)');
@@ -200,4 +207,12 @@ function clear_all() {
 	};
 
 	is_images_loaded_from_local_storage = false;
+}
+
+function wave_started() {
+	game_data.in_wave = true;
+}
+
+function wave_ended() {
+	game_data.in_wave = false;
 }
