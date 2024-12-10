@@ -71,7 +71,13 @@
 				is_settings_open = !is_settings_open;
 			}}
 		>
-			<Icon_Settings width={21} height={21} fill={'#eee'} fill_opacity={0.8} />
+			<Icon_Settings
+				width={21}
+				height={21}
+				fill={'#eee'}
+				fill_opacity={0.8}
+				rotate={is_settings_open ? 45 : 0}
+			/>
 		</button>
 	{/if}
 
