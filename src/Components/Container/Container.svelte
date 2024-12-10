@@ -16,6 +16,9 @@
 	let is_settings_open = false;
 
 	$: $game_data.in_wave, auto_fold();
+	$: if (is_settings_open && is_folded) {
+		is_settings_open = false;
+	}
 
 	function get_transition_values() {
 		switch (fold_direction) {
