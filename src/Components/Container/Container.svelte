@@ -11,6 +11,8 @@
 	export let settings_options = undefined;
 	export let settings_binds = undefined;
 
+	const root = document.documentElement.style;
+
 	let is_folded = false;
 	let show_is_folded_btn = false;
 	let is_settings_open = false;
@@ -18,6 +20,20 @@
 	$: $game_data.in_wave, auto_fold();
 	$: if (is_settings_open && is_folded) {
 		is_settings_open = false;
+	}
+
+	$: $app_store.opacity, set_opacity();
+	$: $app_store.blur, set_blur();
+
+	function set_opacity() {
+		if (root) {
+			root.setProperty('--base-opacity', $app_store.opacity / 100);
+		}
+	}
+	function set_blur() {
+		if (root) {
+			root.setProperty('--base-blur', `${$app_store.blur * 0.2}px`);
+		}
 	}
 
 	function get_transition_values() {
@@ -119,6 +135,7 @@
 			{is_folded}
 			on:click={(e) => {
 				show_is_folded_btn = false;
+				$app_store.auto_fold[settings_binds.auto_fold] = false;
 			}}
 		/>
 	</div>
@@ -132,7 +149,7 @@
 		padding: 2rem;
 		background-color: var(--container-bg-color);
 		border-radius: var(--border-radius-primary);
-		backdrop-filter: blur(10px);
+		backdrop-filter: blur(var(--base-blur));
 		filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.74));
 		z-index: 100;
 	}

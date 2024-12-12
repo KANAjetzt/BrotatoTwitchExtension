@@ -20,7 +20,9 @@ export const app_store = writable({
 		items: false,
 		weapons: false,
 		stats: false
-	}
+	},
+	opacity: 75,
+	blur: 50,
 });
 
 export const game_data = writable({

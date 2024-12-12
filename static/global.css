@@ -35,7 +35,7 @@ html {
 	--animation-slide-in-values: 0.2s ease-in-out forwards;
 	--item-img-size: 80px;
 	--item-padding: 5px;
-	--container-bg-color: hsla(0, 0%, 19%, 0.75);
+	--container-bg-color: hsla(0, 0%, 19%, var(--base-opacity));
 	--btn-bg-color: hsla(0, 0%, 85%, 0.25);
 	--item-bg-alpha: 0.4;
 	--tooltip-bg-alpha: 1;
@@ -58,6 +58,8 @@ html {
 	--scrollbar-color-primary: hsla(0, 0%, 36%, 0.466);
 	--scrollbar-color-secondary: hsla(0, 0%, 85%, 0.25);
 	--scrollbar-color-secondary-a-50: hsla(0, 0%, 85%, 0.5);
+	--base-opacity: 0.75;
+	--base-blur: 10px;
 }
 
 /* Sections

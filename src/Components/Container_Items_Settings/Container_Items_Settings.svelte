@@ -7,7 +7,9 @@
 	export let binds = {
 		rows: 'item_container_rows',
 		sorting: 'item_container_sorting',
-		auto_fold: ''
+		auto_fold: '',
+		opacity: 'opacity',
+		blur: 'blur'
 	};
 
 	export let options = {
@@ -15,7 +17,9 @@
 		sort: true,
 		rows: true,
 		rows_max: 3,
-		auto_fold: true
+		auto_fold: true,
+		opacity: false,
+		blur: false
 	};
 
 	function clear_local_storage() {
@@ -46,7 +50,19 @@
 			</select>
 		</div>
 	{/if}
-	{#if options.auto_fold}
+	{#if options.opacity}
+		<div class="select opacity">
+			<label for="opacity">Opacity</label>
+			<input type="range" class="slider-range" bind:value={$app_store[binds.opacity]} />
+		</div>
+	{/if}
+	{#if options.blur}
+		<div class="select blur">
+			<label for="blur">Blur</label>
+			<input type="range" class="slider-range" bind:value={$app_store[binds.blur]} />
+		</div>
+	{/if}
+		{#if options.auto_fold}
 		<div class="select auto_fold">
 			<label for="auto_fold">Auto fold</label>
 			<input
@@ -128,5 +144,35 @@
 
 	button:hover {
 		cursor: pointer;
+	}
+
+	.slider-range {
+		display: block;
+		-webkit-appearance: none;
+		box-sizing: content-box;
+		width: 100%;
+		height: 10px;
+		margin: 0;
+		border: 2px solid var(--font-color-secondary);
+		border-radius: 10px;
+		font-size: inherit;
+		outline: none;
+		background: transparent;
+		background-image: #333;
+		background-position: 0 center;
+		background-repeat: no-repeat;
+		cursor: pointer;
+	}
+
+	.slider-range::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		box-sizing: border-box;
+		width: 10px;
+		height: 10px;
+		border: 3px;
+		border-radius: 50%;
+		background: #fff;
+		box-shadow: 0 0 0.5em #888;
+		cursor: ew-resize;
 	}
 </style>

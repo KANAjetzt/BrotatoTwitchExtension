@@ -58,10 +58,21 @@
 					heading={'Items'}
 					rows={$app_store.item_container_rows}
 					is_show_settings={true}
+					settings_options={{
+						clear_cache: true,
+						sort: true,
+						rows: true,
+						rows_max: 3,
+						auto_fold: true,
+						opacity: true,
+						blur: true
+					}}
 					settings_binds={{
 						rows: 'item_container_rows',
 						sorting: 'item_container_sorting',
-						auto_fold: 'items'
+						auto_fold: 'items',
+						opacity: 'opacity',
+						blur: 'blur'
 					}}
 					use_keyed_each={true}
 				/>
